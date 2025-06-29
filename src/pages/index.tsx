@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Filipe Cardozo — Currículo</title>
+        <title>Filipe Cardozo</title>
         <meta name="description" content="Currículo de Filipe Cardozo" />
       </Head>
       <main>
