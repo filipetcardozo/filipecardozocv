@@ -22,12 +22,12 @@ Essas regras garantem que a ordem dos hooks permaneça estável entre renders. S
 
 ### 3. Diferença entre **`useRef`**, **`createRef`**, **`forwardRef`** e **`useImperativeHandle`** — e um caso real para cada um
 
-| API                     | Para que serve                                                         | Exemplo de uso                                                  |
-| ----------------------- | ---------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `useRef()`              | Referência mutável que **sobrevive a renders**; não provoca re-render. | Guardar id do `setTimeout`, focar um input.                     |
-| `createRef()`           | Cria ref **nova a cada render**; é mais comum em classes.              | Componente de classe legado.                                    |
-| `forwardRef()`          | “Túnel” para passar uma ref por um componente wrapper.                 | Biblioteca de UI que quer permitir foco num `<button>` interno. |
-| `useImperativeHandle()` | Expõe **métodos controlados** quando alguém pega a ref.                | Date-picker que precisa oferecer `open()` / `close()`.          |
+| API                   | Para que serve                                                        | Exemplo de uso                                                  |
+|------------------------|------------------------------------------------------------------------|------------------------------------------------------------------|
+| `useRef()`            | Referência mutável que **sobrevive a renders**; não provoca re-render. | Guardar id do `setTimeout`, focar um input.                     |
+| `createRef()`         | Cria ref **nova a cada render**; é mais comum em classes.              | Componente de classe legado.                                    |
+| `forwardRef()`        | “Túnel” para passar uma ref por um componente wrapper.                 | Biblioteca de UI que quer permitir foco num `<button>` interno. |
+| `useImperativeHandle()` | Expõe **métodos controlados** quando alguém pega a ref.              | Date-picker que precisa oferecer `open()` / `close()`.          |
 
 Isso evita vazamento de detalhes internos e mantém a tipagem sob controle. ([greatfrontend.com][5], [intervue.io][6])
 

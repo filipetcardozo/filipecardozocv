@@ -1,65 +1,99 @@
-import { getAllTopics, getTopicContent } from '@/utils/md';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import NextLink from 'next/link';
+import { Breadcrumbs, Link as MuiLink, Typography, useTheme, Box } from '@mui/material';
 
-export default function LearningTopicPage({ contentHtml }: { contentHtml: string }) {
-  return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Learning Topic</title>
-      </Head>
+import { getAllSections, getTopicContent } from '@/utils/md';
 
-      <main
-        style={{
-          minHeight: '100vh',
-          backgroundColor: '#ffffff',
-          color: '#1f2937',
-          padding: '1rem',
-          boxSizing: 'border-box',
-          overflowX: 'hidden'
-        }}
-      >
-        <div
-          style={{
-            maxWidth: '1024px',
-            width: '100%',
-            margin: '5rem auto 0',
-            padding: '0 1rem',
-            boxSizing: 'border-box',
-          }}
-        >
-          <article
-            style={{
-              fontFamily: 'system-ui, sans-serif',
-              fontSize: '1rem',
-              lineHeight: '1.6',
-              wordBreak: 'break-word',
-              overflowWrap: 'anywhere'
-            }}
-          >
-            <div dangerouslySetInnerHTML={{ __html: contentHtml }} />
-          </article>
-        </div>
-      </main>
-
-    </>
-  );
+interface PageProps {
+  contentHtml: string;
+  area: string;
+  title: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const topics = getAllTopics();
-
-  const paths = topics.map(({ learning }) => ({
-    params: { learning: learning.split('/') },
-  }));
-
+  const paths = getAllSections().flatMap((s) =>
+    s.topics.map(({ slug }) => ({
+      params: { learning: slug.split('/') },
+    }))
+  );
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const learning = (params!.learning as string[]).join('/');
+export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
+  const segments = params!.learning as string[];
+  const learning = segments.join('/');
   const { contentHtml } = await getTopicContent(learning);
 
-  return { props: { contentHtml } };
+  const area = segments[0];
+  const title = segments[1]
+    .replace(/^\d+-/, '')
+    .replace(/-/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  return { props: { contentHtml, area, title } };
 };
+
+export default function LearningTopicPage({ contentHtml, area, title }: PageProps) {
+  const theme = useTheme();
+
+  return (
+    <>
+      <Head>
+        <title>{title} – Knowledge</title>
+      </Head>
+
+      <Box
+        component="main"
+        sx={{
+          minHeight: '100vh',
+          bgcolor: theme.palette.background.default,
+          color: theme.palette.text.primary,
+          px: 2,
+          overflowX: 'hidden',
+        }}
+      >
+        <Breadcrumbs sx={{ mb: 4, maxWidth: 1024, mx: 'auto', pt: 4 }}>
+          <MuiLink component={NextLink} href="/learning" underline="hover">
+            Learning
+          </MuiLink>
+
+          <MuiLink
+            component="span"
+            underline="none"
+            sx={{ textTransform: 'uppercase', color: 'text.secondary' }}
+          >
+            {area}
+          </MuiLink>
+
+          <Typography color="text.primary">{title}</Typography>
+        </Breadcrumbs>
+
+        <Box
+          component="article"
+          sx={{
+            maxWidth: 1024,
+            mx: 'auto',
+            fontFamily: 'system-ui, sans-serif',
+            lineHeight: 1.6,
+            wordBreak: 'break-word',
+            '& code': {
+              bgcolor: theme.palette.mode === 'dark' ? '#272822' : '#f4f4f4',
+              px: 0.5,
+              py: 0.2,
+              borderRadius: 0.5,
+              fontSize: '0.875em',
+              fontFamily: 'monospace',
+            },
+            '& pre code': {
+              display: 'block',
+              p: 2,
+              overflowX: 'auto',
+            },
+          }}
+          dangerouslySetInnerHTML={{ __html: contentHtml }}
+        />
+      </Box>
+    </>
+  );
+}

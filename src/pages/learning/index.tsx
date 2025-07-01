@@ -1,72 +1,87 @@
-import { getAllTopics } from '@/utils/md';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
-import Link from 'next/link';
+import NextLink from 'next/link';
+import { Box, Typography, Link as MuiLink, useTheme } from '@mui/material';
 
-export async function getStaticProps() {
-  return {
-    props: {
-      topics: getAllTopics(),
-    },
-  };
-}
+import { getAllSections, Section } from '@/utils/md';
 
-export default function KnowledgeIndex({ topics }: any) {
+type Props = { sections: Section[] };
+
+export const getStaticProps: GetStaticProps<Props> = async () => ({
+  props: { sections: getAllSections() },
+});
+
+export default function KnowledgeIndex({ sections }: Props) {
+  const theme = useTheme();
+
+  if (!sections.length)
+    return <Typography align="center">Nenhum tópico encontrado.</Typography>;
+
   return (
     <>
       <Head>
         <title>Technical Knowledge</title>
-        <meta name="description" content="Topics and technical knowledge by Filipe Cardozo" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
 
-      <div
-        style={{
-          maxWidth: '768px',
-          margin: '0 auto',
-          padding: '2rem 1rem',
+      <Box
+        sx={{
+          maxWidth: 768,
+          mx: 'auto',
+          py: 4,
+          px: 2,
         }}
       >
-        <h1
-          style={{
-            fontSize: '2rem',
-            fontWeight: 'bold',
-            marginBottom: '2rem',
-            textAlign: 'center',
-          }}
+        <Typography
+          variant="h4"
+          align="center"
+          sx={{ mb: 4, fontWeight: 600 }}
         >
           Technical Knowledge
-        </h1>
+        </Typography>
 
-        <div style={{ display: 'grid', gap: '1rem' }}>
-          {topics.map((topic: any) => (
-            <Link
-              key={topic.learning}
-              href={`/learning/${topic.learning}`}
-              style={{
-                display: 'block',
-                padding: '1rem 1.25rem',
-                borderRadius: '8px',
-                backgroundColor: '#f9fafb',
-                border: '1px solid #e5e7eb',
-                color: '#111827',
-                textDecoration: 'none',
-                transition: 'all 0.2s ease-in-out',
-              }}
-              onMouseEnter={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#f3f4f6';
-              }}
-              onMouseLeave={e => {
-                (e.currentTarget as HTMLElement).style.backgroundColor = '#f9fafb';
+        {sections.map(({ area, topics }) => (
+          <Box key={area} sx={{ mb: 4 }}>
+            <Typography
+              variant="h6"
+              sx={{
+                textTransform: 'uppercase',
+                mb: 2,
+                color: 'text.secondary',
               }}
             >
-              <div style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '0.25rem' }}>
-                {topic.area}
-              </div>
-              <div style={{ fontSize: '1.125rem', fontWeight: '500' }}>{topic.title}</div>
-            </Link>
-          ))}
-        </div>
-      </div>
+              {area}
+            </Typography>
+
+            <Box sx={{ display: 'grid', gap: 2 }}>
+              {topics.map(({ slug, title }) => (
+                <MuiLink
+                  key={slug}
+                  component={NextLink}
+                  href={`/learning/${slug}`}
+                  underline="none"
+                  sx={{
+                    px: 2,
+                    py: 1.5,
+                    borderRadius: 2,
+                    border: `1px solid ${theme.palette.divider}`,
+                    backgroundColor: theme.palette.mode === 'light' ? '#f9fafb' : '#1e1e1e',
+                    color: theme.palette.text.primary,
+                    transition: '0.2s',
+                    '&:hover': {
+                      backgroundColor:
+                        theme.palette.mode === 'light'
+                          ? '#f0f0f0'
+                          : '#2a2a2a',
+                    },
+                  }}
+                >
+                  {title}
+                </MuiLink>
+              ))}
+            </Box>
+          </Box>
+        ))}
+      </Box>
     </>
   );
 }
