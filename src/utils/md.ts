@@ -41,12 +41,16 @@ export function getAllSections(): Section[] {
         const base = file.name.replace(/\.md$/, '');
         const slug = `${area}/${base}`;
 
-        const title = base
-          .replace(/^\d+-/, '')
-          .replace(/-/g, ' ')
-          .replace(/\b\w/g, (c) => c.toUpperCase());
+        // Se quiser extrair o número como metadado opcional
+        const match = base.match(/^(\d+(?:-\d+)*)-(.*)$/); // e.g., "6-1-testing-library"
+        const title = match
+          ? `${match[1]} ${match[2].replace(/-/g, ' ')}`
+          : base.replace(/-/g, ' ');
 
-        return { slug, title };
+        return {
+          slug,
+          title: title.replace(/\b\w/g, (c) => c.toUpperCase()),
+        };
       });
 
       return { area, topics };

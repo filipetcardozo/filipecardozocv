@@ -2,8 +2,9 @@ import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NextLink from 'next/link';
 import { Breadcrumbs, Link as MuiLink, Typography, useTheme, Box } from '@mui/material';
-
+import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { getAllSections, getTopicContent } from '@/utils/md';
+import { useThemeMode } from '@/contexts/ThemeModeContext';
 
 interface PageProps {
   contentHtml: string;
@@ -35,7 +36,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
 };
 
 export default function LearningTopicPage({ contentHtml, area, title }: PageProps) {
-  const theme = useTheme();
+  const { mode, theme, toggleMode } = useThemeMode();
 
   return (
     <>
@@ -94,6 +95,8 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
       </Box>
+
+      <ToggleThemeButton mode={mode} toggle={toggleMode} />
     </>
   );
 }

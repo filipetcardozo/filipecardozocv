@@ -2,8 +2,9 @@ import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { Box, Typography, Link as MuiLink, useTheme } from '@mui/material';
-
+import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { getAllSections, Section } from '@/utils/md';
+import { useThemeMode } from '@/contexts/ThemeModeContext';
 
 type Props = { sections: Section[] };
 
@@ -12,7 +13,7 @@ export const getStaticProps: GetStaticProps<Props> = async () => ({
 });
 
 export default function KnowledgeIndex({ sections }: Props) {
-  const theme = useTheme();
+  const { mode, theme, toggleMode } = useThemeMode();
 
   if (!sections.length)
     return <Typography align="center">Nenhum tópico encontrado.</Typography>;
@@ -82,6 +83,8 @@ export default function KnowledgeIndex({ sections }: Props) {
           </Box>
         ))}
       </Box>
+
+      <ToggleThemeButton mode={mode} toggle={toggleMode} />
     </>
   );
 }
