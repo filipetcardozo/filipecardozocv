@@ -1,0 +1,207 @@
+# Part 14: TypeScript para Desenvolvedores Front-End (React/Next.js)
+
+---
+
+## 1. O que é TypeScript e quais vantagens ele traz?
+
+**Resposta clara:**
+TypeScript é um superset do JavaScript que adiciona tipagem estática. Ele ajuda a evitar bugs em tempo de desenvolvimento, melhora autocompletar e documentação do código.
+
+---
+
+## 2. Quais são as principais diferenças entre `interface` e `type`?
+
+**Resposta clara:**
+
+* `interface`: preferível para objetos e pode ser extendida.
+* `type`: mais flexível, aceita unions, intersections, etc.
+
+---
+
+## 3. Como definir tipos para props em componentes React?
+
+**Resposta:**
+
+```tsx
+type Props = {
+  title: string;
+  onClick?: () => void;
+};
+const Button: React.FC<Props> = ({ title, onClick }) => ...
+```
+
+---
+
+## 4. O que são tipos literais e como usar?
+
+```ts
+type Color = 'red' | 'green' | 'blue';
+const bg: Color = 'green';
+```
+
+Úteis para limitar valores aceitáveis.
+
+---
+
+## 5. Como usar `as const`?
+
+```ts
+const STATUS = {
+  IDLE: 'idle',
+  LOADING: 'loading',
+} as const;
+```
+
+Fixa o tipo literal em vez de `string` genérico.
+
+---
+
+## 6. O que são `Pick`, `Omit`, `Partial`, `Required`?
+
+**Resposta clara:**
+
+* `Pick<T, K>`: escolhe campos de T.
+* `Omit<T, K>`: exclui campos de T.
+* `Partial<T>`: todos os campos opcionais.
+* `Required<T>`: todos obrigatórios.
+
+---
+
+## 7. Como tipar arrays e objetos dinâmicos?
+
+```ts
+const users: User[] = [...];
+const map: Record<string, number> = { a: 1, b: 2 };
+```
+
+---
+
+## 8. Como usar `keyof`, `typeof`, `in`, e `extends`?
+
+**Exemplo:**
+
+```ts
+type Obj = { a: number; b: string };
+type Keys = keyof Obj; // 'a' | 'b'
+```
+
+`typeof` pega tipo de uma constante. `in` é usado em mapped types. `extends` define herança ou condição.
+
+---
+
+## 9. Como definir tipos condicionais?
+
+```ts
+type IsString<T> = T extends string ? true : false;
+```
+
+Úteis para manipulação de tipos complexos.
+
+---
+
+## 10. Qual a diferença entre `unknown`, `any`, `never`?
+
+* `any`: desliga a tipagem (foge do TypeScript).
+* `unknown`: exige verificação antes de usar.
+* `never`: representa algo que nunca ocorre (ex: throw).
+
+---
+
+## 11. Como tipar hooks como `useState`, `useRef`, `useReducer`?
+
+```ts
+const [count, setCount] = useState<number>(0);
+const inputRef = useRef<HTMLInputElement>(null);
+```
+
+---
+
+## 12. Como usar tipos genéricos com componentes?
+
+```ts
+function List<T>({ items }: { items: T[] }) {
+  return <>{items.map(...)}</>;
+}
+```
+
+---
+
+## 13. Como tipar uma função assíncrona?
+
+```ts
+async function fetchData(): Promise<User[]> {
+  return fetch(...).then(res => res.json());
+}
+```
+
+---
+
+## 14. Como lidar com validação de tipos em tempo de execução?
+
+**Resposta:** use zod, yup ou io-ts.
+
+```ts
+const schema = z.object({ name: z.string() });
+```
+
+---
+
+## 15. Como evitar `any` em código legado?
+
+* Use `noImplicitAny`.
+* Tipar aos poucos com `unknown` + guards.
+* Refatorar para tipos literais e interfaces nomeadas.
+
+---
+
+## 16. O que são Utility Types e como usá-los bem?
+
+TypeScript traz helpers como:
+
+* `NonNullable<T>`
+* `ReturnType<T>`
+* `Parameters<T>`
+
+Eles reduzem boilerplate e mantêm tipos DRY.
+
+---
+
+## 17. Como criar tipos reusáveis e modulares?
+
+**Resposta:**
+
+* Declare tipos por arquivo (`types.ts`).
+* Use namespaces ou prefixos para clareza (`User`, `UserResponse`).
+
+---
+
+## 18. Como usar Type Inference de forma eficiente?
+
+**Resposta clara:**
+Confie na inferência quando possível:
+
+```ts
+const name = 'Filipe'; // string
+```
+
+Mas prefira tipar explicitamente interfaces de API ou valores externos.
+
+---
+
+## 19. Como integrar com bibliotecas JS puras?
+
+Use `@types/` ou crie `d.ts`:
+
+```ts
+declare module 'lib-externa';
+```
+
+---
+
+## 20. Como configurar um projeto TypeScript moderno?
+
+**Checklist:**
+
+* `tsconfig.json` com `strict`, `target: esnext`, `module: esnext`.
+* ESLint com `@typescript-eslint`.
+* Type-check no CI (ex: `tsc --noEmit`).
