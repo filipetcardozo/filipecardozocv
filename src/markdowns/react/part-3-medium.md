@@ -119,16 +119,3 @@ useEffect(() => {
 
 * Cada alteração em `query` cancela a chamada anterior via **`AbortController`**.
 * Evita que a resposta “lenta” sobrescreva o estado mais recente. ([medium.com][11], [greatfrontend.com][12])
-
-[1]: https://dev.to/ruppysuppy/17-react-interview-questions-you-must-know-as-a-developer-in-2025-1o6f?utm_source=chatgpt.com "17 React Interview Questions You Must Know as a Developer in 2025"
-[2]: https://www.simplilearn.com/tutorials/reactjs-tutorial/reactjs-interview-questions?utm_source=chatgpt.com "Top 65+ React JS Interview Questions & Answers for 2025"
-[3]: https://www.geeksforgeeks.org/reactjs/top-react-router-interview-questions/?utm_source=chatgpt.com "React Router Interview Questions And Answers - GeeksforGeeks"
-[4]: https://www.geeksforgeeks.org/reactjs/reactjs-usenavigate-hook/?utm_source=chatgpt.com "ReactJS useNavigate() Hook - GeeksforGeeks"
-[5]: https://www.greatfrontend.com/questions/quiz/what-is-forwardref-in-react-used-for?utm_source=chatgpt.com "What is `forwardRef()` in React used for? - GreatFrontEnd"
-[6]: https://www.intervue.io/mock-interview-questions/programming-languages/top-react-interview-questions?utm_source=chatgpt.com "Top React Interview Questions | Mock Interview - Intervue"
-[7]: https://www.greatfrontend.com/questions/quiz/how-would-one-optimize-the-performance-of-react-contexts-to-reduce-rerenders?utm_source=chatgpt.com "How to optimize the performance of React contexts to reduce ..."
-[8]: https://www.lambdatest.com/learning-hub/next-js-interview-questions "Top 50 Next.js Interview Questions [2024]"
-[9]: https://www.geeksforgeeks.org/reactjs/next-js-interview-questions-answers/ "Next.js Interview Questions and Answers - 2025 - GeeksforGeeks"
-[10]: https://mentorcruise.com/questions/nextjs/?utm_source=chatgpt.com "40 NextJS Interview Questions - MentorCruise"
-[11]: https://medium.com/%40theNewGenCoder/react-abortcontroller-and-why-we-even-need-it-d4cf924e2b89?utm_source=chatgpt.com "React:- AbortController and why we even need it. - Medium"
-[12]: https://www.greatfrontend.com/react-interview-playbook/react-data-fetching?utm_source=chatgpt.com "Data Fetching in React Interviews - GreatFrontEnd"

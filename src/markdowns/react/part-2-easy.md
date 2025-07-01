@@ -1,7 +1,3 @@
-Ótima direção. Aqui estão **10 perguntas sobre fundamentos simples mas essenciais** de React e Next.js — aquelas que parecem "básicas demais", mas que frequentemente derrubam candidatos ou causam bugs difíceis justamente por não serem bem compreendidas.
-
----
-
 ## 🔹 1. O que acontece se você chamar `setState` com o mesmo valor do estado atual?
 
 **Resposta clara:**
@@ -104,9 +100,3 @@ const inputRef = useRef();
 É mover o estado para o **componente pai comum** entre dois ou mais componentes que precisam compartilhar esse estado.
 
 **Por quê:** evita duplicação, facilita sincronização e segue o fluxo de dados unidirecional do React.
-
----
-
-Essas são as bases que **todo desenvolvedor React, mesmo sênior, precisa ter cristalinas**. Muitas falhas práticas vêm justamente de subestimar esses pontos.
-
-Se quiser, posso gerar flashcards ou pequenos desafios práticos para treinar cada item. Deseja seguir por aí?
