@@ -1,0 +1,683 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Filipe Cardozo</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.highlight-default_background {
+	color: rgba(50, 48, 44, 1);
+}
+.highlight-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.highlight-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(115, 114, 110, 1);
+	fill: rgba(115, 114, 110, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(205, 60, 58, 1);
+	fill: rgba(205, 60, 58, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(248, 248, 247, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(248, 243, 252, 1);
+}
+.block-color-pink_background {
+	background: rgba(252, 241, 246, 1);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-default { background-color: rgba(84, 72, 49, 0.08); }
+.select-value-color-gray { background-color: rgba(84, 72, 49, 0.15); }
+.select-value-color-brown { background-color: rgba(210, 162, 141, 0.35); }
+.select-value-color-orange { background-color: rgba(224, 124, 57, 0.27); }
+.select-value-color-yellow { background-color: rgba(236, 191, 66, 0.39); }
+.select-value-color-green { background-color: rgba(123, 183, 129, 0.27); }
+.select-value-color-blue { background-color: rgba(93, 165, 206, 0.27); }
+.select-value-color-purple { background-color: rgba(168, 129, 197, 0.27); }
+.select-value-color-pink { background-color: rgba(225, 136, 179, 0.27); }
+.select-value-color-red { background-color: rgba(244, 171, 159, 0.4); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="22642363-eee6-8095-9498-d92ef2839d0d" class="page serif"><header><h1 class="page-title">Filipe Cardozo</h1><p class="page-description"></p></header><div class="page-body"><p id="22642363-eee6-8021-89ee-def51fe46c7b" class=""><em>Senior Software Engineer</em></p><div id="22642363-eee6-8094-8da3-fdc55ee5581d" class="column-list"><div id="22642363-eee6-8023-8e0a-ed1247cc3804" style="width:68.75%" class="column"><p id="22642363-eee6-80f6-b5a2-d18bc905e453" class=""><strong>Email:</strong> <a href="mailto:johnsmith@example.com">filipetcardozo@gmail.com</a></p><p id="22642363-eee6-8010-9b5d-dfffda0521aa" class=""><strong>Address:</strong> Pelotas, Rio Grande do Sul - Brazil</p></div><div id="22642363-eee6-8036-b0c5-db72511c1ff8" style="width:31.25%" class="column"><p id="22642363-eee6-8019-8b4e-efee7d459a6e" class=""><strong>Phone:</strong> <a href="https://www.notion.sotel:">+55 (53) 99967-0470</a></p><p id="22642363-eee6-80ad-aad9-dcda1a7d7057" class="">
+</p></div></div><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="22642363-eee6-80e9-b937-c8c0f77cb65c"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/verified_green.svg"/></div><div style="width:100%"><p id="22642363-eee6-803e-aeb2-d21b300253ad" class="">Software engineer with over 5 years of experience delivering scalable digital solutions in critical environments. Proven track record in modernizing legacy systems, providing technical leadership on React/Next.js applications, and delivering high-impact business outcomes. Skilled in complex integrations and direct collaboration with product, design, and executive teams. Full engagement across the software development lifecycle, from conception to operations.</p></div></figure><h2 id="22642363-eee6-80d6-8b4a-d22015176f4a" class="">Experience</h2><hr id="22642363-eee6-807c-b772-ef589a4e6a28"/><blockquote id="22642363-eee6-8068-a297-c078efc94cab" class="">5 years developing scalable web applications using React and Next.js, including SSR, SSG, code splitting, and performance optimization techniques.</blockquote><blockquote id="22642363-eee6-80c9-9065-c510e8dc9c7a" class="">Full-stack background with Node.js, .NET, SQL, NoSQL, and the development of robust RESTful APIs.</blockquote><blockquote id="22642363-eee6-8071-8f10-fed20211b23d" class="">CI/CD pipeline automation with Azure DevOps and deployment of applications in cloud environments (AWS, Azure).</blockquote><blockquote id="22642363-eee6-80b9-90ae-e1433d3482f7" class="">Implementation of integrations with CRMs, legacy systems, and BI tools, including ETL processes and adaptation for regulated environments.</blockquote><p id="22642363-eee6-80ae-ba11-cfa6d097a03c" class="">
+</p><p id="22642363-eee6-8098-9114-e1d9e1f32633" class=""><strong>Neogrid — Software Engineer (2022 - Present → ~3 anos)</strong></p><ul id="22642363-eee6-809a-983d-d8ccbf8d091c" class="bulleted-list"><li style="list-style-type:disc">I’m currently working on the EDI project, one of the company’s core platforms, responsible for communication between more than <strong>2,700 manufacturers</strong>, <strong>290 retailers</strong>, and handling over <strong>80 million electronic documents per year</strong>.</li></ul><ul id="22642363-eee6-801e-88d1-f75b375d0bba" class="bulleted-list"><li style="list-style-type:disc">My main focus is <strong>refactoring the legacy platform (JSP)</strong> to a new stack based on <strong>Next.js and React</strong>, emphasizing performance, maintainability, and scalability.</li></ul><ul id="22642363-eee6-8047-8e60-cfdb0d2ca732" class="bulleted-list"><li style="list-style-type:disc">I lead the implementation of critical features such as BI visualizations, directly impacting stakeholder decision-making.</li></ul><ul id="22642363-eee6-800a-9e07-fc1df396cb4e" class="bulleted-list"><li style="list-style-type:disc">I work across the entire development lifecycle: technical decisions, task refinement, alignment with product, design, and architecture.</li></ul><p id="22642363-eee6-80e4-8c08-d2f3ba536862" class="">
+</p><p id="22642363-eee6-80a0-b92b-deb8402149bb" class=""><strong>Marco Investimentos — Full-stack Developer (2020 - 2022 → ~2 anos)</strong></p><ul id="22642363-eee6-80a8-bfa9-c2967e855522" class="bulleted-list"><li style="list-style-type:disc">Led the development of a corporate CRM platform, working as a full-stack developer (React, .NET, Node.js), delivering features such as Kanban boards, dashboards, and financial reports.</li></ul><ul id="22642363-eee6-8074-9d54-e2f8d76b738d" class="bulleted-list"><li style="list-style-type:disc">The platform supported the expansion of the advisory team from 20 to over 70 professionals, aligning with the company’s operational growth.</li></ul><ul id="22642363-eee6-809b-8f50-fa707aae648d" class="bulleted-list"><li style="list-style-type:disc">The implemented solutions were critical to supporting the company’s net growth from R$1 billion to over R$2 billion, ensuring the platform’s technical and operational scalability during rapid business expansion.</li></ul><ul id="22642363-eee6-8042-8592-ecd860b58b3c" class="bulleted-list"><li style="list-style-type:disc">Progressed from intern to mid-level developer, taking on front-end leadership and strategic integrations with XP Investimentos.</li></ul><h2 id="22642363-eee6-80da-9d2c-ede3c46330d6" class="">Education</h2><hr id="22642363-eee6-8068-b3bb-d29329a43143"/><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="22642363-eee6-8062-a44c-e91d5ed8cdee"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/graduate_gray.svg"/></div><div style="width:100%"><p id="22642363-eee6-8061-b678-eae555992334" class=""><strong>Software Engineering, Anhanguera Educacional (2023 - 2026)</strong></p></div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="22642363-eee6-8086-a96b-ede7be61c661"><div style="font-size:1.5em"><img class="icon" src="https://www.notion.so/icons/graduate_gray.svg"/></div><div style="width:100%"><p id="22642363-eee6-80aa-8b4f-caa80854ccf9" class=""><strong>Electrotechnics, IFSul Pelotas (2014 - 2018)</strong></p></div></figure><h2 id="22642363-eee6-803a-a7bc-ec121c3f5126" class="">Side Projects</h2><hr id="22642363-eee6-8052-bdd2-d202fd73cdb8"/><p id="22642363-eee6-8058-8d11-e46772d5f719" class=""><strong>SafeTask </strong><em><strong>(2024 - Present)</strong></em><div class="indented"><p id="22642363-eee6-807a-bf71-e0460b874bba" class="">Solution developed in response to the floods in Rio Grande do Sul, used to coordinate field teams. The platform features an interactive map, real-time task execution, and analytical dashboards.</p><p id="22642363-eee6-801a-a045-fd1a1b7ab801" class="">Stack:<strong> </strong>React, Next.js, Node.js, MongoDB, GCP, TypeScript, Firebase</p></div></p><p id="22642363-eee6-80d1-93cd-d2d7e9b9093b" class=""><strong>Meu Repertório </strong><em><strong>(2022 - 2023)</strong></em><div class="indented"><p id="22642363-eee6-801a-8e9e-c6de4ed7fb39" class="">Platform for musicians to organize sheet music and setlists. Includes editing, viewing, and integrated management features.</p><p id="22642363-eee6-8085-97e5-eb91d421d8db" class="">Stack:<strong> </strong>React, Next.js, MongoDB, Firebase, TypeScript</p></div></p><p id="22642363-eee6-80a1-bdfe-d21606589f35" class=""><strong>Imob Partners </strong><em><strong>(2023)</strong></em><div class="indented"><p id="22642363-eee6-8064-839d-eba986763894" class="">Property management app using GCP + ChatGPT for automatic description generation.</p><p id="22642363-eee6-8030-8f4b-d740a878c8ba" class="">Stack: React, Node.js, MongoDB, GCP, TypeScript</p></div></p><p id="22642363-eee6-80ad-9ef4-dc656b13005d" class=""><strong>Construtora Fazz </strong><em><strong>(2021 - 2024)</strong></em><div class="indented"><p id="22642363-eee6-8007-83ab-d395a49e540f" class="">System for managing orders, materials, construction finances, and daily construction reports (RDOs).</p><p id="22642363-eee6-8066-b3ca-d05141676fc2" class="">Stack:<strong> </strong>React, Next.js, MongoDB, TypeScript</p></div></p><h2 id="22642363-eee6-8078-9491-fb5a7cbed80b" class="">Skills</h2><hr id="22642363-eee6-802e-9fa3-eed7bdfacbbc"/><p id="22642363-eee6-8083-8f77-c37f677dd9b0" class="">Hard Skills</p><ul id="22642363-eee6-80de-8e23-d8e6e4d53633" class="bulleted-list"><li style="list-style-type:disc"><strong>Front-end: </strong>React.js, Next.js, TypeScript, Webpack, SSR, SSG, Jest</li></ul><ul id="22642363-eee6-8040-a7a6-d32975112f5e" class="bulleted-list"><li style="list-style-type:disc"><strong>Back-end:</strong> Node.js, .NET Core, REST APIs, SQL, MongoDB</li></ul><ul id="22642363-eee6-804b-991d-fea961f94356" class="bulleted-list"><li style="list-style-type:disc"><strong>DevOps &amp; Cloud:</strong> Azure DevOps, CI/CD, GCP, AWS</li></ul><ul id="22642363-eee6-8048-a00e-ff9d618feb43" class="bulleted-list"><li style="list-style-type:disc"><strong>Architecture &amp; Processes:</strong> Design Patterns, Scrum, Kanban, Complex integrations</li></ul><p id="22642363-eee6-800a-beee-fffd7fb9ff65" class="">Soft Skills</p><ul id="22642363-eee6-80af-bf44-d5c8b95c0e77" class="bulleted-list"><li style="list-style-type:disc">Problem-solving</li></ul><ul id="22642363-eee6-807d-8311-f6732bf5194f" class="bulleted-list"><li style="list-style-type:disc">Decision-making</li></ul><ul id="22642363-eee6-8099-a728-e325d6cb9a31" class="bulleted-list"><li style="list-style-type:disc">Clear communication with both technical and non-technical stakeholders</li></ul><ul id="22642363-eee6-8022-806e-fc53bb442d1f" class="bulleted-list"><li style="list-style-type:disc">Change management and continuous improvement</li></ul><ul id="22642363-eee6-8016-a68e-d69b5ff193e4" class="bulleted-list"><li style="list-style-type:disc">Technical leadership and cross-team collaboration</li></ul><ul id="22642363-eee6-80a7-a7f0-e48a2f057d46" class="bulleted-list"><li style="list-style-type:disc">Strategic thinking and business value focus</li></ul><h2 id="22642363-eee6-80d0-b7cd-c26de712b723" class="">Languages</h2><hr id="22642363-eee6-802b-812b-ded89daa9054"/><ul id="22642363-eee6-80df-8de7-f064ec79a184" class="bulleted-list"><li style="list-style-type:disc"><strong>Portuguese:</strong> Native</li></ul><ul id="22642363-eee6-80d6-af3b-e1a3d2c30a30" class="bulleted-list"><li style="list-style-type:disc"><strong>English:</strong> Professional proficiency (technical reading, documentation, team communication)</li></ul></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

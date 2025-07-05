@@ -5,3 +5,37 @@ body,
   padding: 0;
   height: 100%;
 }
+
+blockquote {
+  font-size: 1em !important;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+@media print {
+
+  html,
+  body {
+    overflow: visible !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .notion-html {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    box-shadow: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+  }
+
+  .MuiBox-root {
+    overflow: visible !important;
+  }
+}

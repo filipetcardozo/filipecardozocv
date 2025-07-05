@@ -29,7 +29,15 @@ export const ThemeModeProvider: React.FC<ThemeModeProviderProps> = ({ children }
 
   useEffect(() => {
     const stored = localStorage.getItem('theme-mode') as ThemeMode | null;
-    if (stored === 'dark' || stored === 'light') setMode(stored);
+
+    if (stored === 'dark' || stored === 'light') {
+      setMode(stored);
+    } else {
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const detected = prefersDark ? 'dark' : 'light';
+      setMode(detected);
+      localStorage.setItem('theme-mode', detected);
+    }
   }, []);
 
   const toggleMode = useCallback(() => {
