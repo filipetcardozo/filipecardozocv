@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { useThemeMode } from "@/contexts/ThemeModeContext";
 import { useRouter } from "next/router";
+import { ParticlesBackground } from "@/components/ParticlesBackground";
 
 type Lang = "pt" | "en";
 
@@ -103,6 +104,8 @@ export default function Home({
           }}
         />
       </Box>
+
+      <ParticlesBackground />
 
       <FloatingMenu
         lang={lang}

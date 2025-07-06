@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState, MouseEvent, SyntheticEvent } from "react";
 import {
   Box,
-  IconButton,
+  ClickAwayListener,
+  FabProps,
   Menu,
   MenuItem,
-  Tooltip,
+  SpeedDial,
+  SpeedDialAction,
+  SpeedDialIcon,
   Typography,
 } from "@mui/material";
-import LanguageIcon from "@mui/icons-material/Language";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import LanguageIcon from "@mui/icons-material/Language";
 import DownloadIcon from "@mui/icons-material/DownloadOutlined";
 import DescriptionIcon from "@mui/icons-material/DescriptionOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlineOutlined";
@@ -22,22 +25,34 @@ interface FloatingMenuProps {
   onLangChange: (lang: Lang) => void;
 }
 
-export function FloatingMenu({
-  lang,
-  onLangChange
-}: FloatingMenuProps) {
-  const [downloadAnchor, setDownloadAnchor] = useState<null | HTMLElement>(null);
-  const [langAnchor, setLangAnchor] = useState<null | HTMLElement>(null);
+export function FloatingMenu({ lang, onLangChange }: FloatingMenuProps) {
+  const { mode, toggleMode } = useThemeMode();
 
-  const { mode, theme, toggleMode } = useThemeMode();
+  const [speedDialOpen, setSpeedDialOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const [downloadOpen, setDownloadOpen] = useState(false);
 
-  const handleDownloadOpen = (e: React.MouseEvent<HTMLElement>) =>
-    setDownloadAnchor(e.currentTarget);
-  const handleDownloadClose = () => setDownloadAnchor(null);
+  const langBtnRef = useRef<HTMLElement | null>(null);
+  const downloadBtnRef = useRef<HTMLElement | null>(null);
 
-  const handleLangOpen = (e: React.MouseEvent<HTMLElement>) =>
-    setLangAnchor(e.currentTarget);
-  const handleLangClose = () => setLangAnchor(null);
+  const handleLangToggle = (e: MouseEvent<HTMLElement>) => {
+    langBtnRef.current = e.currentTarget;
+    setLangOpen((prev) => !prev);
+  };
+
+  const handleDownloadToggle = (e: MouseEvent<HTMLElement>) => {
+    downloadBtnRef.current = e.currentTarget;
+    setDownloadOpen((prev) => !prev);
+  };
+
+  const handleSpeedDialClose = (
+    _e: SyntheticEvent<{}, Event>,
+    reason: "toggle" | "blur" | "mouseLeave" | "escapeKeyDown"
+  ) => {
+    if (reason === "toggle" || reason === "escapeKeyDown") {
+      setSpeedDialOpen(false);
+    }
+  };
 
   const downloads: Record<
     Lang,
@@ -70,64 +85,75 @@ export function FloatingMenu({
   };
 
   return (
-    <Box sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 1300 }}>
-      <Box sx={{ mb: 2 }}>
-        <Tooltip title="Fale comigo no WhatsApp" placement="left">
-          <IconButton
-            aria-label="Fale comigo no WhatsApp"
-            href="https://wa.me/5553999670470"
-            target="_blank"
-            rel="noopener noreferrer"
-            size="large"
-            sx={{
-              bgcolor: "#25D366",
-              color: "white",
-              width: 56,
-              height: 56,
-              boxShadow: 3,
-              "&:hover": { bgcolor: "#1EBE5D" },
+    <ClickAwayListener
+      onClickAway={() => {
+        setSpeedDialOpen(false);
+        setLangOpen(false);
+        setDownloadOpen(false);
+      }}
+    >
+      <Box>
+        <SpeedDial
+          ariaLabel="Menu rápido"
+          icon={<SpeedDialIcon />}
+          sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 1300 }}
+          open={speedDialOpen}
+          onOpen={() => setSpeedDialOpen(true)}
+          onClose={handleSpeedDialClose}
+        >
+          <SpeedDialAction
+            icon={<WhatsAppIcon sx={{ fontSize: 22 }} />}
+            slotProps={{
+              tooltip: {
+                title: "WhatsApp"
+              },
+              fab: {
+                component: "a",
+                href: "https://wa.me/5553999670470",
+                rel: "noopener noreferrer",
+                target: "_blank"
+              } as Partial<FabProps<"a">>
             }}
-          >
-            <WhatsAppIcon sx={{ fontSize: 28 }} />
-          </IconButton>
-        </Tooltip>
-      </Box>
+          />
 
-      <Box sx={{ mb: 2 }}>
-        <Tooltip title="Alterar idioma" placement="left">
-          <IconButton
-            aria-label="Alterar idioma"
-            onClick={handleLangOpen}
-            size="large"
-            sx={{
-              bgcolor: "primary.main",
-              color: "primary.contrastText",
-              width: 56,
-              height: 56,
-              boxShadow: 3,
-              "&:hover": { bgcolor: "primary.dark" },
-            }}
-          >
-            <LanguageIcon />
-          </IconButton>
-        </Tooltip>
+          <SpeedDialAction
+            icon={mode === "dark" ? <Brightness7 /> : <Brightness4 />}
+            tooltipTitle={mode === "dark" ? "Modo claro" : "Modo escuro"}
+            onClick={toggleMode}
+          />
+
+          <SpeedDialAction
+            icon={<LanguageIcon />}
+            tooltipTitle="Idioma"
+            onClick={handleLangToggle}
+            ref={langBtnRef}
+          />
+
+          <SpeedDialAction
+            icon={<DownloadIcon />}
+            tooltipTitle="Downloads"
+            onClick={handleDownloadToggle}
+            ref={downloadBtnRef}
+          />
+        </SpeedDial>
 
         <Menu
-          anchorEl={langAnchor}
-          open={Boolean(langAnchor)}
+          anchorEl={langBtnRef.current}
+          open={langOpen}
+          onClose={() => setLangOpen(false)}
           disableScrollLock
-          onClose={handleLangClose}
+          disablePortal
           anchorOrigin={{ vertical: "center", horizontal: "left" }}
           transformOrigin={{ vertical: "center", horizontal: "right" }}
         >
           {(["pt", "en"] as Lang[]).map((l) => (
             <MenuItem
               key={l}
+              selected={lang === l}
               onClick={() => {
                 onLangChange(l);
-                handleLangClose();
+                setLangOpen(false);
               }}
-              selected={lang === l}
             >
               <Typography fontWeight={lang === l ? "bold" : "normal"}>
                 {l === "pt" ? "Português" : "English"}
@@ -135,76 +161,37 @@ export function FloatingMenu({
             </MenuItem>
           ))}
         </Menu>
-      </Box>
 
-      <Tooltip title="Baixar arquivos" placement="left">
-        <IconButton
-          aria-label="Baixar arquivos"
-          onClick={handleDownloadOpen}
-          size="large"
-          sx={{
-            bgcolor: "primary.main",
-            color: "primary.contrastText",
-            width: 56,
-            height: 56,
-            boxShadow: 3,
-            "&:hover": { bgcolor: "primary.dark" },
-          }}
+        <Menu
+          anchorEl={downloadBtnRef.current}
+          open={downloadOpen}
+          onClose={() => setDownloadOpen(false)}
+          disableScrollLock
+          disablePortal
+          anchorOrigin={{ vertical: "center", horizontal: "left" }}
+          transformOrigin={{ vertical: "center", horizontal: "right" }}
         >
-          <DownloadIcon sx={{ fontSize: 28 }} />
-        </IconButton>
-      </Tooltip>
-
-      <Menu
-        anchorEl={downloadAnchor}
-        open={Boolean(downloadAnchor)}
-        disableScrollLock
-        onClose={handleDownloadClose}
-        anchorOrigin={{ vertical: "center", horizontal: "left" }}
-        transformOrigin={{ vertical: "center", horizontal: "right" }}
-      >
-        <Typography
-          variant="subtitle2"
-          sx={{ mb: 1, color: "text.secondary", px: 1 }}
-        >
-          Downloads
-        </Typography>
-
-        {downloads[lang].map(({ label, href, icon }) => (
-          <MenuItem
-            key={href}
-            component="a"
-            href={href}
-            download
-            onClick={handleDownloadClose}
-            sx={{ gap: 1 }}
+          <Typography
+            variant="subtitle2"
+            sx={{ mb: 1, color: "text.secondary", px: 1 }}
           >
-            {icon}
-            {label}
-          </MenuItem>
-        ))}
-      </Menu>
-
-      <Box sx={{ mt: 2 }}>
-        <Tooltip title={mode === "dark" ? "Modo claro" : "Modo escuro"} placement="left">
-          <IconButton
-            aria-label="Alternar tema"
-            onClick={toggleMode}
-            size="large"
-            sx={{
-              bgcolor: "background.paper",
-              border: "1px solid",
-              borderColor: "divider",
-              width: 56,
-              height: 56,
-              boxShadow: 3,
-              "&:hover": { bgcolor: "action.hover" },
-            }}
-          >
-            {mode === "dark" ? <Brightness7 /> : <Brightness4 />}
-          </IconButton>
-        </Tooltip>
+            Downloads
+          </Typography>
+          {downloads[lang].map(({ label, href, icon }) => (
+            <MenuItem
+              key={href}
+              component="a"
+              href={href}
+              download
+              onClick={() => setDownloadOpen(false)}
+              sx={{ gap: 1 }}
+            >
+              {icon}
+              {label}
+            </MenuItem>
+          ))}
+        </Menu>
       </Box>
-    </Box>
+    </ClickAwayListener>
   );
 }
