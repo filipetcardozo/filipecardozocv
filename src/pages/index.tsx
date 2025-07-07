@@ -6,6 +6,7 @@ import fs from "fs";
 import path from "path";
 import { useThemeMode } from "@/contexts/ThemeModeContext";
 import { useRouter } from "next/router";
+import { fixContactLinks } from "@/utils/fixContactLinks";
 
 type Lang = "pt" | "en";
 
@@ -13,10 +14,13 @@ export async function getStaticProps() {
   const ptPath = path.join(process.cwd(), "public/files/resume-pt.html");
   const enPath = path.join(process.cwd(), "public/files/resume-en.html");
 
+  const ptRaw = fs.readFileSync(ptPath, "utf-8");
+  const enRaw = fs.readFileSync(enPath, "utf-8");
+
   return {
     props: {
-      ptHtml: fs.readFileSync(ptPath, "utf-8"),
-      enHtml: fs.readFileSync(enPath, "utf-8"),
+      ptHtml: fixContactLinks(ptRaw),
+      enHtml: fixContactLinks(enRaw),
     },
   };
 }
@@ -30,7 +34,7 @@ export default function Home({
 }) {
   const router = useRouter();
   const { theme } = useThemeMode();
-
+  
   const [lang, setLang] = useState<Lang>("pt");
 
   useEffect(() => {
