@@ -17,6 +17,7 @@ import DescriptionIcon from "@mui/icons-material/DescriptionOutlined";
 import MailOutlineIcon from "@mui/icons-material/MailOutlineOutlined";
 import { Brightness4, Brightness7 } from "@mui/icons-material";
 import { useThemeMode } from "@/contexts/ThemeModeContext";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 type Lang = "pt" | "en";
 
@@ -102,7 +103,7 @@ export function FloatingMenu({ lang, onLangChange }: FloatingMenuProps) {
           onClose={handleSpeedDialClose}
         >
           <SpeedDialAction
-            icon={<WhatsAppIcon sx={{ fontSize: 22 }} />}
+            icon={<WhatsAppIcon sx={{ fontSize: 22, color: "#25D366" }} />}
             slotProps={{
               tooltip: {
                 title: "WhatsApp"
@@ -117,6 +118,28 @@ export function FloatingMenu({ lang, onLangChange }: FloatingMenuProps) {
           />
 
           <SpeedDialAction
+            icon={<LinkedInIcon sx={{ fontSize: 22, color: "#0077B5" }} />}
+            slotProps={{
+              tooltip: {
+                title: "LinkedIn",
+              },
+              fab: {
+                component: "a",
+                href: "https://www.linkedin.com/in/filipetcardozo",
+                rel: "noopener noreferrer",
+                target: "_blank",
+              } as Partial<FabProps<"a">>,
+            }}
+          />
+
+          <SpeedDialAction
+            icon={<DownloadIcon />}
+            tooltipTitle="Downloads"
+            onClick={handleDownloadToggle}
+            ref={downloadBtnRef}
+          />
+
+          <SpeedDialAction
             icon={mode === "dark" ? <Brightness7 /> : <Brightness4 />}
             tooltipTitle={mode === "dark" ? "Modo claro" : "Modo escuro"}
             onClick={toggleMode}
@@ -127,13 +150,6 @@ export function FloatingMenu({ lang, onLangChange }: FloatingMenuProps) {
             tooltipTitle="Idioma"
             onClick={handleLangToggle}
             ref={langBtnRef}
-          />
-
-          <SpeedDialAction
-            icon={<DownloadIcon />}
-            tooltipTitle="Downloads"
-            onClick={handleDownloadToggle}
-            ref={downloadBtnRef}
           />
         </SpeedDial>
 
