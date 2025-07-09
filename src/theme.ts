@@ -7,27 +7,27 @@ export const themeOptions = (mode: 'light' | 'dark'): ThemeOptions => ({
     secondary: { main: '#37474F' },
     ...(mode === 'light'
       ? {
-          background: {
-            default: '#f9f9f9',
-            paper: '#ffffff',
-          },
-          text: {
-            primary: '#1a1a1a',
-            secondary: '#555555',
-          },
-        }
+        background: {
+          default: '#f9f9f9',
+          paper: '#ffffff',
+        },
+        text: {
+          primary: '#1a1a1a',
+          secondary: '#555555',
+        },
+      }
       : {
-          background: {
-            default: '#121212',
-            paper: '#1e1e1e',
-          },
-          text: {
-            primary: '#e3e3e3',
-            secondary: '#a3a3a3',
-          },
-        }),
+        background: {
+          default: '#121212',
+          paper: '#1e1e1e',
+        },
+        text: {
+          primary: '#e3e3e3',
+          secondary: '#a3a3a3',
+        },
+      }),
   },
   typography: {
-    fontFamily: 'Inter, Roboto, sans-serif',
+    fontFamily: '"Source Sans Pro", sans-serif',
   },
 });

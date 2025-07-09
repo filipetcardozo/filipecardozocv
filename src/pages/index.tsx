@@ -35,7 +35,7 @@ export default function Home({
 }) {
   const router = useRouter();
   const { theme } = useThemeMode();
-  
+
   const [lang, setLang] = useState<Lang>("pt");
 
   useEffect(() => {
@@ -85,6 +85,7 @@ export default function Home({
           className={`notion-html ${theme.palette.mode}`}
           dangerouslySetInnerHTML={{ __html: lang === "pt" ? ptHtml : enHtml }}
           sx={{
+            fontFamily: '"Source Sans Pro", sans-serif',
             maxWidth: 900,
             px: 2,
             mb: 15,
@@ -104,6 +105,9 @@ export default function Home({
                   : "#2525250a",
               borderRadius: 1,
               p: 2,
+            },
+            "& *": {
+              fontFamily: '"Source Sans Pro", sans-serif !important',
             },
           }}
         />
