@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { ParticlesBackground } from "@/components/ParticlesBackground";
 
 export default function CoverLetter() {
   return (
@@ -27,6 +28,8 @@ export default function CoverLetter() {
           allowFullScreen
         />
       </main>
+
+      <ParticlesBackground />
     </>
   );
 }

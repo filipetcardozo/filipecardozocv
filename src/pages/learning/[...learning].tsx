@@ -5,6 +5,7 @@ import { Breadcrumbs, Link as MuiLink, Typography, useTheme, Box } from '@mui/ma
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { getAllSections, getTopicContent } from '@/utils/md';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
+import { ParticlesBackground } from "@/components/ParticlesBackground";
 
 interface PageProps {
   contentHtml: string;
@@ -97,6 +98,8 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
       </Box>
 
       <ToggleThemeButton mode={mode} toggle={toggleMode} />
+
+      <ParticlesBackground />
     </>
   );
 }

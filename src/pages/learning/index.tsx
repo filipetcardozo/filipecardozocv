@@ -5,6 +5,7 @@ import { Box, Typography, Link as MuiLink, useTheme } from '@mui/material';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { getAllSections, Section } from '@/utils/md';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
+import { ParticlesBackground } from "@/components/ParticlesBackground";
 
 type Props = { sections: Section[] };
 
@@ -85,6 +86,8 @@ export default function KnowledgeIndex({ sections }: Props) {
       </Box>
 
       <ToggleThemeButton mode={mode} toggle={toggleMode} />
+
+      <ParticlesBackground />
     </>
   );
 }
