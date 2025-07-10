@@ -1,120 +1,125 @@
-🧱 Arquitetura de Software
-1. O que é separação de responsabilidades (SoC) e por que é importante?
-É o princípio de isolar diferentes responsabilidades de um sistema em componentes distintos.
-Isso reduz o acoplamento e facilita:
+## 🔒 Segurança em Aplicações Web
 
-Testes unitários.
+### 1. **O que é OWASP Top 10? Por que ele é relevante?**
 
-Manutenção e evolução.
+É uma lista das **10 vulnerabilidades mais críticas em aplicações web**, publicada pela **OWASP** (Open Web Application Security Project).
 
-Reuso e substituição de partes isoladas.
+Relevância:
 
-Exemplo clássico: manter lógica de apresentação (UI) separada da lógica de domínio e persistência.
+* Serve como **referência global** de boas práticas.
+* É usada por empresas para auditorias, treinamentos e compliance.
+* Muitos ataques bem-sucedidos exploram falhas listadas ali (XSS, SQL Injection, etc).
 
-2. O que caracteriza uma arquitetura monolítica versus uma baseada em microsserviços?
-Monolítica: aplicação unificada, um único deploy, todos os módulos compartilham memória/processo.
-Fácil de começar, mas difícil de escalar de forma independente.
+---
 
-Microsserviços: módulos isolados, com deploys independentes, comunicação via rede (REST, gRPC, etc).
-Promove escalabilidade e autonomia, mas traz complexidade operacional (observabilidade, contratos, versionamento).
+### 2. **O que é XSS e como preveni-lo em front-end moderno?**
 
-3. O que é acoplamento e coesão? Como afetam a manutenibilidade?
-Acoplamento: grau de dependência entre componentes.
-Menor acoplamento = menos impacto em mudanças.
+**Cross-Site Scripting (XSS)** ocorre quando código malicioso é injetado e executado no navegador do usuário.
 
-Coesão: grau em que os elementos de um módulo trabalham em torno de uma única responsabilidade.
-Alta coesão = módulos com propósito claro e focado.
+Prevenção:
 
-Objetivo: Baixo acoplamento, alta coesão → sistemas mais fáceis de evoluir e menos propensos a bugs em cadeia.
+* **Escape de conteúdo dinâmico** (nunca renderizar HTML vindo de dados sem sanitização).
+* **Uso estrito de APIs DOM seguras** (evitar `innerHTML`, usar `textContent`).
+* Implementar **Content Security Policy (CSP)** para restringir execuções.
 
-4. Qual o papel das camadas (ex.: apresentação, domínio, dados) em uma arquitetura clássica?
-A separação em camadas visa organizar responsabilidades e definir limites claros.
-Modelo clássico em 3 camadas:
+---
 
-Apresentação (UI): interação com o usuário.
+### 3. **O que é CSRF e quais estratégias você usa para mitigá-lo?**
 
-Domínio (Negócio): regras, validações, lógica.
+**Cross-Site Request Forgery (CSRF)** força um usuário autenticado a realizar ações sem consentimento em outro site.
 
-Infraestrutura (Dados): persistência, APIs externas.
+Mitigações:
 
-Facilita manutenção, testes e separação de competências entre times.
+* **Tokens anti-CSRF** com verificação de origem.
+* **SameSite cookies** (`SameSite=Strict` ou `Lax`).
+* **Verificação de headers customizados** (ex: `X-CSRF-Token`).
 
-5. Como decidir entre usar uma arquitetura orientada a eventos ou baseada em requisições síncronas?
-Orientada a eventos: ideal quando há baixa acoplabilidade entre componentes e necessidade de resiliência, escalabilidade ou tempo real.
-Ex: fila de pedidos, sistemas com backpressure, IoT.
+Importante: APIs REST com JWT geralmente evitam CSRF usando **cookies não compartilhados** e **CORS restrito**.
 
-Síncrona: quando é necessário feedback imediato e simplicidade de controle de fluxo.
-Ex: login, checkout, validações em tempo real.
+---
 
-Critério central: acoplamento temporal e latência tolerável.
+### 4. **O que é autenticação vs. autorização?**
 
-6. O que são design trade-offs e como avaliá-los?
-São decisões arquiteturais que envolvem sacrifícios entre qualidades desejadas (ex.: performance vs. manutenibilidade).
-Avaliação envolve:
+* **Autenticação**: validar *quem* é o usuário (ex: login).
+* **Autorização**: decidir *o que* o usuário pode acessar após autenticado.
 
-Mapeamento dos impactos técnicos e de negócio.
+Ambas são necessárias e **devem ser tratadas separadamente**, tanto no front-end quanto na API.
 
-Identificação de custos de mudança futura (YAGNI vs. antecipação).
+---
 
-Prototipagem e experimentação quando necessário.
+### 5. **Quais os riscos de armazenar tokens no `localStorage`?**
 
-Não há soluções ideais, só escolhas conscientes baseadas em contexto.
+* **Tokens no `localStorage` são acessíveis via JavaScript**.
+  Se houver um XSS, o atacante pode ler e exfiltrar o token.
 
-7. O que é DDD (Domain-Driven Design) e quando faz sentido aplicá-lo?
-DDD é uma abordagem que centraliza a modelagem de software no domínio do problema real do negócio, com foco em linguagem ubíqua e isolamento de contextos.
+Alternativas mais seguras:
 
-Faz sentido quando:
+* **Cookies HTTP-only com SameSite e Secure.**
+* **Tokens curtos + refresh tokens rotativos.**
+* **Uso de memória volátil (em contextos mais restritos).**
 
-O domínio é complexo e mutável.
+---
 
-Há múltiplas subáreas com regras distintas.
+### 6. **O que são secure headers e por que configurá-los corretamente?**
 
-Equipes técnicas e de negócio atuam em conjunto e precisam alinhar vocabulário e design.
+São **cabeçalhos HTTP** que reforçam a segurança do navegador:
 
-Evite em sistemas CRUD simples com pouca lógica de negócio.
+* `Content-Security-Policy` – mitiga XSS.
+* `Strict-Transport-Security` – força HTTPS.
+* `X-Content-Type-Options` – evita *MIME-sniffing*.
+* `X-Frame-Options` – evita *clickjacking*.
 
-8. O que são cross-cutting concerns e como você os trata em sistemas complexos?
-São funcionalidades transversais a múltiplos módulos, como:
+Importância: **protegem contra uma ampla gama de ataques client-side** com uma configuração simples no servidor.
 
-Logging
+---
 
-Autenticação
+### 7. **Como validar dados no front-end e por que isso não basta?**
 
-Monitoramento
+Validação no front-end:
 
-Validação
+* Garante boa UX (feedback rápido).
+* Reduz chamadas inválidas à API.
 
-Segurança
+**Mas não é suficiente**, pois pode ser ignorada ou manipulada:
 
-Tratamento típico:
+* DevTools permitem alterar o DOM.
+* Requisições podem ser falsificadas por ferramentas como Postman.
 
-Middleware (em Express, NestJS, etc).
+Por isso, a **validação definitiva deve estar no backend**, com os mesmos critérios (ou mais estritos).
 
-AOP (Aspect-Oriented Programming).
+---
 
-Decorators ou injeções de dependência.
+### 8. **O que é princípio do menor privilégio no contexto de front-end?**
 
-Centralização via serviços ou bibliotecas comuns.
+Significa que **cada parte da aplicação só deve ter acesso ao necessário para sua função**.
 
-9. Como a arquitetura influencia escalabilidade horizontal e vertical?
-Escalabilidade horizontal: multiplicação de instâncias. Requer arquitetura stateless, com comunicação desacoplada e cache externo.
+Exemplos:
 
-Escalabilidade vertical: aumento da capacidade de uma única instância. Depende de otimização local, mas tem limites físicos.
+* Um componente visual não deve conhecer o token do usuário.
+* Usuário logado como “leitor” não deve ver rotas de administração nem em código-fonte.
 
-A escolha de arquitetura (monólito, microsserviços, serverless) define quais estratégias serão mais viáveis.
+Ajuda a reduzir superfícies de ataque e isolar falhas.
 
-10. O que é arquitetura evolutiva e como adotá-la em equipes ágeis?
-É uma arquitetura desenhada para suportar mudanças frequentes sem reescrever tudo.
-Princípios:
+---
 
-Modularidade alta.
+### 9. **O que são ataques de injeção e como proteger formulários contra eles?**
 
-Feature toggles para experimentação.
+São ataques onde entradas do usuário manipulam comandos de sistemas subjacentes (ex: SQL, shell, XML, etc).
 
-CI/CD com automação de testes.
+Proteção:
 
-Documentação leve e viva.
+* **Escapar/parametrizar dados sempre** (backend).
+* Evitar concatenação de strings para gerar comandos.
+* Validar tipo, formato e limites no front-end e backend.
 
-Feedback contínuo de uso e performance.
+Em formulários React, por exemplo, inputs não devem jamais ser usados para compor comandos diretamente.
 
-Adotar implica aceitar mudanças como parte do design, e não exceções.
+---
+
+### 10. **Como garantir segurança em comunicações entre microfrontends ou SPAs?**
+
+* **Isolamento de domínios/escopos de execução** (Shadow DOM, iframe sandboxing, event scoping).
+* **Uso de tokens limitados em escopo e tempo**, com **mecanismos de renovação centralizados**.
+* **Validação mútua entre frontends via contratos versionados**.
+* **Não confiar no front-end para decisões críticas** — sempre validar permissões no backend.
+* **Evitar o compartilhamento direto de contexto via `window` global**.
