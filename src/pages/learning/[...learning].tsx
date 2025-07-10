@@ -49,8 +49,6 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
         component="main"
         sx={{
           minHeight: '100vh',
-          bgcolor: theme.palette.background.default,
-          color: theme.palette.text.primary,
           px: 2,
           overflowX: 'hidden',
         }}
