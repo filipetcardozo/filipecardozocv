@@ -36,6 +36,12 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   return { props: { contentHtml, area, title } };
 };
 
+function wrapTablesWithScroll(html: string): string {
+  return html
+    .replace(/<table>/g, '<div class="table-scroll"><table>')
+    .replace(/<\/table>/g, '</table></div>');
+}
+
 export default function LearningTopicPage({ contentHtml, area, title }: PageProps) {
   const { mode, theme, toggleMode } = useThemeMode();
 
@@ -90,8 +96,15 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
               p: 2,
               overflowX: 'auto',
             },
+            '& .table-scroll': {
+              overflowX: 'auto',
+            },
+
+            '& .table-scroll table': {
+              width: 'max-content',
+            },
           }}
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
+          dangerouslySetInnerHTML={{ __html: wrapTablesWithScroll(contentHtml) }}
         />
       </Box>
 
