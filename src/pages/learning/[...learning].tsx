@@ -99,9 +99,10 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
             '& .table-scroll': {
               overflowX: 'auto',
             },
-
-            '& .table-scroll table': {
-              width: 'max-content',
+            '& .table-scroll th, & .table-scroll td': {
+              padding: '0.75em 1em',
+              textAlign: 'left',
+              whiteSpace: 'nowrap',
             },
           }}
           dangerouslySetInnerHTML={{ __html: wrapTablesWithScroll(contentHtml) }}
