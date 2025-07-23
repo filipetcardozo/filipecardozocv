@@ -1,6 +1,5 @@
 ## 🔹 1. Como funcionam os React Server Components (RSC) e por que eles são um divisor de águas?
 
-**Resposta clara e elaborada:**
 
 React Server Components (RSC) são **componentes que rodam 100% no servidor**, **não enviam nenhum JavaScript para o cliente** e podem acessar dados diretamente (DB, APIs, etc.), sem expor nada ao front.
 
@@ -17,7 +16,6 @@ React Server Components (RSC) são **componentes que rodam 100% no servidor**, *
 
 ## 🔹 2. O que é hydration no React e como ela afeta a performance?
 
-**Resposta clara e elaborada:**
 
 **Hydration** é o processo que ocorre quando o React recebe um HTML renderizado no servidor (SSR ou SSG) e precisa "conectar" esse HTML com o JavaScript do cliente para torná-lo interativo.
 
@@ -36,7 +34,6 @@ React Server Components (RSC) são **componentes que rodam 100% no servidor**, *
 
 ## 🔹 3. Como funciona o mecanismo de streaming no SSR moderno com Next.js?
 
-**Resposta clara e elaborada:**
 
 Streaming no SSR (Server-Side Rendering) permite que o servidor **envie partes da página conforme elas ficam prontas**, em vez de esperar tudo para depois enviar.
 
@@ -52,7 +49,6 @@ Streaming no SSR (Server-Side Rendering) permite que o servidor **envie partes d
 
 ## 🔹 4. Qual a diferença entre renderização no servidor (SSR), geração estática (SSG), ISR e Client Side Rendering (CSR) no Next.js?
 
-**Resposta clara e elaborada:**
 
 * **SSR (Server-Side Rendering):** a cada requisição, o HTML é gerado no servidor.
   *Vantagem:* sempre atualizado.
@@ -73,7 +69,6 @@ Streaming no SSR (Server-Side Rendering) permite que o servidor **envie partes d
 
 ## 🔹 5. Como o React prioriza atualizações e o que mudou com o concurrent rendering?
 
-**Resposta clara e elaborada:**
 
 Antes, todas as atualizações eram tratadas com **a mesma prioridade** — o React parava tudo para re-renderizar o que você pediu.
 
@@ -93,7 +88,6 @@ Isso melhora a fluidez do app, especialmente em interações com listas grandes,
 
 ## 🔹 6. Qual a diferença entre useEffect, useLayoutEffect e Server Effects no App Router?
 
-**Resposta clara e elaborada:**
 
 * `useEffect`: roda depois da pintura da tela. Ideal para lógica assíncrona como fetch, eventos.
 * `useLayoutEffect`: roda antes da pintura. Ideal para medições e manipulação visual (mas pode atrasar o render).
@@ -107,7 +101,6 @@ Isso melhora a fluidez do app, especialmente em interações com listas grandes,
 
 ## 🔹 7. O que é uma race condition em hooks e como evitá-la?
 
-**Resposta clara e elaborada:**
 
 Uma **race condition** acontece quando múltiplas chamadas assíncronas disputam o mesmo espaço de estado, e a mais lenta pode sobrescrever a mais recente.
 
@@ -131,7 +124,6 @@ Se `query` mudar rapidamente, resultados de uma busca antiga podem sobrescrever 
 
 ## 🔹 8. Como estruturar um sistema de Design System com componentes reutilizáveis no React moderno?
 
-**Resposta clara e elaborada:**
 
 1. **Componentes desacoplados:** não dependem de estado global ou contexto. Recebem tudo por props.
 2. **Próximos da estrutura do HTML:** ex: `Button`, `Input`, `Card`, `Modal`.
@@ -144,7 +136,6 @@ Exemplos de bibliotecas com esse padrão: Radix UI (headless), ShadCN (com styli
 
 ## 🔹 9. Como aplicar Code Splitting no Next.js e quando isso faz diferença?
 
-**Resposta clara e elaborada:**
 
 **Code Splitting** divide seu código JS em pedaços menores (chunks). Assim, o navegador carrega só o necessário por página.
 
@@ -167,7 +158,6 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 
 ## 🔹 10. Como isolar e otimizar componentes pesados que causam re-renderização em cascata?
 
-**Resposta clara e elaborada:**
 
 **Problema:** Um componente pai atualiza e força re-render dos filhos, mesmo que eles não mudem.
 
