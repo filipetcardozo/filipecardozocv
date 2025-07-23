@@ -4,7 +4,7 @@
 
 ## 1. Quais serviços GCP são mais usados com apps Next.js?
 
-**Resposta clara:**
+
 
 * **Cloud Run**: deploy de containers HTTP escaláveis sob demanda.
 * **App Engine**: deploy sem container, com abstração de infraestrutura.
@@ -49,7 +49,7 @@ Cloud Run detecta e configura escalonamento automático, HTTPS, autenticação, 
 
 ## 4. Como usar Firestore com React ou Next.js?
 
-**Resposta clara:**
+
 
 * Use SDK Web (`firebase/firestore`) no client.
 * Em Server Components, use `firebase-admin` para acessar dados com privilégios.
@@ -66,7 +66,7 @@ const data = await db.collection('users').get();
 
 ## 5. Como lidar com autenticação Firebase + Next.js no App Router?
 
-**Resposta clara:**
+
 
 * Use `firebase-admin` em Server Components.
 * Valide cookies JWT usando `verifyIdToken`.
@@ -81,7 +81,7 @@ const data = await db.collection('users').get();
 
 ## 6. Como usar Cloud Storage com Next.js para upload e download?
 
-**Resposta clara:**
+
 
 * No client, envie o arquivo para uma rota da API Next.js.
 * Na rota, use o SDK `@google-cloud/storage` para enviar para o bucket.
@@ -99,7 +99,7 @@ Recomenda-se usar Signed URLs ou IAM para controle de acesso.
 
 ## 7. Como habilitar CDN e caching com GCP para apps Next.js?
 
-**Resposta clara:**
+
 
 * Use **Cloud CDN** com balanceador de carga HTTP(S).
 * Configure headers `Cache-Control` no Next.js (`next.config.js` ou headers dinâmicos).
@@ -125,7 +125,7 @@ res.setHeader('Cache-Control', 'public, max-age=3600');
 
 ## 9. Quais boas práticas de segurança ao usar GCP com apps web?
 
-**Resposta clara:**
+
 
 * Use `IAM` para controlar acesso granular.
 * Não exponha segredos no client; use `dotenv` e `Secret Manager`.
@@ -136,7 +136,7 @@ res.setHeader('Cache-Control', 'public, max-age=3600');
 
 ## 10. Como estruturar um monorepo com apps Next.js e funções GCP?
 
-**Resposta clara:**
+
 
 * Use `Turborepo` com workspaces (pnpm ou yarn).
 * Separe `apps/web`, `packages/ui`, `functions/api`.

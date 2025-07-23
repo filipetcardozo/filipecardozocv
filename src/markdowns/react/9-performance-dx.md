@@ -4,7 +4,7 @@
 
 ## 1. O que é TTFB e como otimizá-lo no Next.js?
 
-**Resposta clara:**
+
 TTFB (Time to First Byte) mede o tempo entre a requisição HTTP e o primeiro byte da resposta.
 
 **Melhorias comuns:**
@@ -17,7 +17,7 @@ TTFB (Time to First Byte) mede o tempo entre a requisição HTTP e o primeiro by
 
 ## 2. Como evitar re-renderizações desnecessárias no React?
 
-**Resposta clara:**
+
 
 * Memoize componentes com `React.memo()`.
 * Use `useMemo` e `useCallback` para valores e funções estáveis.
@@ -30,7 +30,7 @@ Use o React DevTools Profiler para identificar pontos quentes.
 
 ## 3. Como usar lazy loading para melhorar LCP (Largest Contentful Paint)?
 
-**Resposta clara:**
+
 
 * Use `next/image` para lazy load de imagens grandes.
 * Use `dynamic()` com `ssr: false` para componentes pesados que não precisam ser renderizados no servidor.
@@ -52,7 +52,7 @@ Use o React DevTools Profiler para identificar pontos quentes.
 
 ## 5. Como otimizar o bundle JavaScript no Next.js?
 
-**Resposta clara:**
+
 
 * Evite importar bibliotecas inteiras (ex: `import { debounce } from 'lodash'` vs `import debounce from 'lodash/debounce'`).
 * Use `dynamic()` para code-splitting manual.
@@ -63,7 +63,7 @@ Use o React DevTools Profiler para identificar pontos quentes.
 
 ## 6. O que é o Turbopack e como ele melhora a DX em Next.js?
 
-**Resposta clara:**
+
 Turbopack é o novo bundler do Next.js (substitui Webpack), escrito em Rust. É:
 
 * Muito mais rápido em dev mode.
@@ -76,7 +76,7 @@ Ideal para grandes projetos que sofriam com lentidão de rebuild.
 
 ## 7. Como configurar prefetch automático em links?
 
-**Resposta clara:**
+
 O Next.js faz `prefetch` automático de páginas visíveis via `<Link>`. Para links fora da viewport ou com comportamento específico:
 
 ```tsx
@@ -89,7 +89,7 @@ Prefetch melhora a percepção de velocidade (Page Transitions).
 
 ## 8. Como controlar a prioridade de carregamento de imagens?
 
-**Resposta clara:**
+
 O componente `next/image` permite:
 
 ```tsx
@@ -102,7 +102,7 @@ Use `priority` para a imagem principal acima da dobra (hero). Lazy loading conti
 
 ## 9. Como organizar imports e aliases para melhorar DX?
 
-**Resposta clara:**
+
 
 * Use `paths` em `tsconfig.json`:
 
@@ -117,7 +117,7 @@ Use `priority` para a imagem principal acima da dobra (hero). Lazy loading conti
 
 ## 10. Como otimizar fonts e evitar layout shift (CLS)?
 
-**Resposta clara:**
+
 
 * Use `next/font` (v13+) para carregamento eficiente e com fallback.
 * Evite `@import` em CSS; use fonte embutida no bundle.

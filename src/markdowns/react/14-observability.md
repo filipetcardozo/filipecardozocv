@@ -4,14 +4,14 @@
 
 ## 1. O que é observabilidade e como ela difere de monitoramento?
 
-**Resposta clara:**
+
 Observabilidade é a capacidade de entender o que está acontecendo dentro de um sistema complexo com base em seus sinais externos (logs, métricas, traces). Monitoramento é o ato de coletar e visualizar esses sinais.
 
 ---
 
 ## 2. Quais os três pilares da observabilidade?
 
-**Resposta clara:**
+
 
 1. **Logs:** eventos discretos com contexto textual.
 2. **Métricas:** dados agregados com timestamp (ex: latência, erros).
@@ -30,7 +30,7 @@ Ambas são essenciais para diagnóstico completo.
 
 ## 4. Como aplicar observabilidade em apps front-end (React)?
 
-**Resposta clara:**
+
 
 * Logar erros no client com ferramentas como Sentry.
 * Medir Web Vitals (LCP, FID, CLS).
@@ -48,7 +48,7 @@ Ambas são essenciais para diagnóstico completo.
 
 ## 6. Quais ferramentas comuns para observabilidade?
 
-**Resposta clara:**
+
 
 * Logs: Loki, ELK Stack, Sentry.
 * Métricas: Prometheus, Datadog, New Relic.
@@ -58,7 +58,7 @@ Ambas são essenciais para diagnóstico completo.
 
 ## 7. O que é tracing distribuído?
 
-**Resposta clara:**
+
 É o rastreamento de uma requisição através de vários serviços e camadas. Mostra onde ocorrem atrasos, falhas ou retrabalhos. Cada span representa uma etapa.
 
 ---
@@ -73,7 +73,7 @@ Ambas são essenciais para diagnóstico completo.
 
 ## 9. Como propagar contexto de trace entre serviços?
 
-**Resposta clara:**
+
 
 * Use headers HTTP padronizados (ex: `traceparent`, `x-request-id`).
 * Ferramentas como OpenTelemetry automatizam isso.

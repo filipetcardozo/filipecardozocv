@@ -4,7 +4,7 @@
 
 ## 1. Por que acessibilidade é importante mesmo em apps internos?
 
-**Resposta clara:**
+
 
 * Inclusão: garante acesso a pessoas com deficiência visual, motora ou cognitiva.
 * Legalidade: em muitos países, é exigência legal (ex: ADA nos EUA, LBI no Brasil).
@@ -15,7 +15,7 @@
 
 ## 2. Como React contribui para acessibilidade por padrão?
 
-**Resposta clara:**
+
 
 * Usa `label` corretamente associado a `input` via `htmlFor`.
 * Usa eventos normalizados (`onClick`, `onKeyDown`) com compatibilidade entre navegadores.
@@ -27,7 +27,7 @@ Porém, não garante acessibilidade sozinho. Cabe ao dev cuidar da semântica e 
 
 ## 3. O que é WAI-ARIA e quando devemos usar atributos `aria-*`?
 
-**Resposta clara:**
+
 WAI-ARIA é um conjunto de atributos para melhorar a acessibilidade quando HTML semântico não é suficiente.
 
 **Exemplos:**
@@ -40,7 +40,7 @@ WAI-ARIA é um conjunto de atributos para melhorar a acessibilidade quando HTML 
 
 ## 4. Como garantir que modais sejam acessíveis?
 
-**Resposta clara:**
+
 
 * O foco deve mover para o modal ao abrir e retornar ao trigger ao fechar.
 * O modal deve ter `role="dialog"` e `aria-modal="true"`.
@@ -51,7 +51,7 @@ WAI-ARIA é um conjunto de atributos para melhorar a acessibilidade quando HTML 
 
 ## 5. Como tornar botões e links acessíveis com apenas teclado?
 
-**Resposta clara:**
+
 
 * Use `<button>` e `<a>` reais (não divs clicáveis).
 * Se usar `div`, adicione:
@@ -77,7 +77,7 @@ role="button" tabIndex={0} onKeyDown={handleKey}
 
 ## 7. Qual a função do atributo `alt` em imagens? Quando omitir?
 
-**Resposta clara:**
+
 
 * `alt` descreve a imagem para leitores de tela.
 * Imagens decorativas devem ter `alt=""` (vazio).
@@ -93,7 +93,7 @@ No `next/image`, basta passar `alt` normalmente:
 
 ## 8. Como lidar com cores e contraste?
 
-**Resposta clara:**
+
 
 * Use contraste mínimo de 4.5:1 entre texto e fundo.
 * Ferramentas como WebAIM Contrast Checker ajudam.
@@ -103,7 +103,7 @@ No `next/image`, basta passar `alt` normalmente:
 
 ## 9. Como criar componentes reutilizáveis acessíveis (ex: Input, Button)?
 
-**Resposta clara:**
+
 
 * Use HTML semântico como base (`<button>`, `<label>`, `<input>`).
 * Propague atributos como `aria-*`, `id`, `htmlFor`, `disabled` via props.
@@ -114,7 +114,7 @@ No `next/image`, basta passar `alt` normalmente:
 
 ## 10. Como tornar Single Page Applications (SPA) mais acessíveis?
 
-**Resposta clara:**
+
 
 * Atualize `document.title` dinamicamente.
 * Anuncie mudanças de rota com `aria-live`:

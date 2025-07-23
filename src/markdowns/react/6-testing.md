@@ -4,7 +4,7 @@
 
 ## 1. Quais tipos de testes aplicamos em apps React?
 
-**Resposta clara:**
+
 
 1. **Unitário:** testa funções isoladas (ex: reducers, utils).
 2. **Integração:** testa componentes com subcomponentes e interações.
@@ -14,7 +14,7 @@
 
 ## 2. Qual a melhor biblioteca para testes unitários de componentes React?
 
-**Resposta clara:**
+
 
 * **React Testing Library (RTL):** foca no comportamento, não na implementação.
 * Usa queries como `getByText`, `getByRole` — imita a forma como o usuário interage.
@@ -25,7 +25,7 @@ Evite testar detalhes de implementação, como classes CSS ou estruturas interna
 
 ## 3. Como testar hooks customizados?
 
-**Resposta clara:**
+
 Use o `@testing-library/react-hooks` ou `renderHook` da RTL para executar o hook isoladamente:
 
 ```ts
@@ -39,7 +39,7 @@ Evite acoplar a testes de componentes se o hook for puramente lógico.
 
 ## 4. Como simular requisições HTTP em testes?
 
-**Resposta clara:**
+
 Use mocks:
 
 * `jest.fn()` para funções locais.
@@ -57,7 +57,7 @@ Permite testes mais realistas sem acesso à internet.
 
 ## 5. Como testar componentes Next.js com `getServerSideProps` ou `getStaticProps`?
 
-**Resposta clara:**
+
 
 * Extraia a lógica de dados para funções puras.
 * Teste essas funções separadamente.
@@ -69,7 +69,7 @@ Evite tentar testar diretamente `getServerSideProps` como se fosse uma função 
 
 ## 6. Como lidar com contextos (Theme, Auth) nos testes?
 
-**Resposta clara:**
+
 Crie um `wrapper` de contexto para ser usado nos testes:
 
 ```ts
@@ -83,7 +83,7 @@ Assim, você consegue testar qualquer componente que dependa de contexto.
 
 ## 7. Como testar interações (cliques, inputs, etc)?
 
-**Resposta clara:**
+
 Use `fireEvent` ou `userEvent` da RTL:
 
 ```ts
@@ -97,7 +97,7 @@ expect(screen.getByText('Sucesso')).toBeInTheDocument()
 
 ## 8. O que é um teste frágil e como evitá-lo?
 
-**Resposta clara:**
+
 Teste frágil é aquele que quebra com pequenas mudanças não funcionais.
 
 **Evite:**
@@ -112,7 +112,7 @@ Prefira queries acessíveis e foco em comportamento.
 
 ## 9. Qual a diferença entre testes unitários e E2E?
 
-**Resposta clara:**
+
 
 * **Unitário:** roda rápido, barato, cobre lógica isolada.
 * **E2E:** testa o sistema como um todo, com navegadores reais, mas são mais lentos e sensíveis.
@@ -126,7 +126,7 @@ Prefira queries acessíveis e foco em comportamento.
 
 ## 10. Como configurar testes com Jest no Next.js?
 
-**Resposta clara:**
+
 
 1. Instale:
 

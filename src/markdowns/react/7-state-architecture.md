@@ -15,7 +15,7 @@
 
 ## 2. Quais problemas aparecem ao usar Context API como store reativa?
 
-**Resposta clara:**
+
 Toda vez que você muda o `value` de um Context, **todos os consumidores re-renderizam**. Mesmo que apenas uma pequena parte do estado tenha mudado.
 
 **Solução:** use `use-context-selector` ou Zustand para evitar re-renderizações em cascata.
@@ -40,7 +40,7 @@ Se você precisa de controle sofisticado, persistência, middlewares e time gran
 
 ## 4. Como manter o estado sincronizado entre Server e Client (SSR)?
 
-**Resposta clara:**
+
 
 * No lado servidor, obtenha os dados via `fetch`, `cookies`, etc.
 * No lado cliente, reidrate o estado usando props iniciais.
@@ -62,7 +62,7 @@ Esse padrão evita flashs de tela e garante consistência entre server/client.
 
 ## 5. Como evitar "prop drilling" profundo sem overengineering?
 
-**Resposta clara:**
+
 
 * Até 2 níveis de props pode ser aceitável.
 * Acima disso, considere extrair para contexto ou store externa (Zustand).
@@ -72,7 +72,7 @@ Esse padrão evita flashs de tela e garante consistência entre server/client.
 
 ## 6. Como compartilhar estado entre tabs ou janelas?
 
-**Resposta clara:**
+
 
 * Use `localStorage` + `storage` event para sincronizar.
 * Para casos mais reativos: `BroadcastChannel API` ou Zustand com plugin de sincronização.
@@ -83,7 +83,7 @@ Isso é útil para apps com login, carrinho, ou preferências que devem ser refl
 
 ## 7. Como evitar que um estado global vaze entre usuários no SSR?
 
-**Resposta clara:**
+
 
 * Nunca crie stores fora de escopos de função. Elas devem ser criadas dentro de cada request (ex: `getServerSideProps`).
 * Evite variáveis globais fora do handler.
@@ -93,7 +93,7 @@ Isso é útil para apps com login, carrinho, ou preferências que devem ser refl
 
 ## 8. Qual o papel de ferramentas como React Query ou SWR na arquitetura de estado?
 
-**Resposta clara:**
+
 Elas não são "state managers" tradicionais. Gerenciam **estado remoto** (fetch, cache, revalidação).
 
 **React Query, SWR, TanStack Query:** evitam que você tenha que controlar loading, error e cache manualmente.
@@ -104,7 +104,7 @@ Podem conviver com Zustand/Redux (estado de UI ou local).
 
 ## 9. Como isolar lógica de estado de componentes em React?
 
-**Resposta clara:**
+
 Crie custom hooks (`useCounter`, `useAuth`, etc.) para encapsular a lógica e expor apenas a interface pública.
 
 **Vantagens:**
@@ -117,7 +117,7 @@ Crie custom hooks (`useCounter`, `useAuth`, etc.) para encapsular a lógica e ex
 
 ## 10. Como testar stores e hooks que usam estado global?
 
-**Resposta clara:**
+
 
 * Para Zustand, basta importar o store e testar a lógica diretamente.
 * Para Redux, use `configureStore` e `Provider` nos testes.

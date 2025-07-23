@@ -4,7 +4,6 @@
 
 ## 1. O que caracteriza uma aplicação monolítica?
 
-**Resposta clara:**
 Um monolito reúne toda a aplicação em um só processo e deployment, abrigando interface, regras de negócio e persistência. Essa simplicidade inicial agiliza o desenvolvimento e a comunicação entre times, pois tudo está no mesmo código. Entretanto, à medida que a base cresce, fica complexo dividir responsabilidades e evoluir de forma independente, prejudicando escalabilidade e manutenção.
 
 ---

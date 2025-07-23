@@ -4,7 +4,6 @@
 
 ## 1. O que é .NET MAUI e como se diferencia do Xamarin?
 
-**Resposta clara:**
 .NET MAUI é o sucessor do Xamarin.Forms. Ele permite criar apps nativos para Android, iOS, macOS e Windows com um único codebase em C# e XAML.
 
 **Principais diferenças:**
@@ -17,7 +16,6 @@
 
 ## 2. Quais são os principais componentes visuais em MAUI?
 
-**Resposta clara:**
 
 * `ContentPage`, `StackLayout`, `Grid`, `CollectionView` para layout.
 * `Label`, `Entry`, `Button`, `Image`, `Switch`, etc. para UI.
@@ -28,7 +26,6 @@
 
 ## 3. Como funciona o ciclo de vida de um app MAUI?
 
-**Resposta clara:**
 
 1. `MauiProgram.cs` configura DI, fonts, handlers.
 2. `App.xaml` inicializa a navegação.
@@ -40,7 +37,6 @@
 
 ## 4. O que é o Shell no MAUI e quando usá-lo?
 
-**Resposta clara:**
 Shell simplifica navegação, deep linking e estrutura da UI:
 
 ```xml
@@ -57,7 +53,6 @@ Evita a necessidade de criar um NavigationStack manual. Ideal para apps com estr
 
 ## 5. Como lidar com dependência de plataforma no MAUI?
 
-**Resposta clara:**
 Use **partial classes**, **interfaces + DI** ou a diretiva `#if ANDROID`, `#if IOS`.
 
 **Exemplo:**
@@ -78,7 +73,6 @@ builder.Services.AddSingleton<IMyService, MyServiceAndroid>();
 
 ## 6. Como usar MVVM no .NET MAUI?
 
-**Resposta clara:**
 
 * **Model**: representa os dados.
 * **View**: a UI em XAML.
@@ -94,7 +88,6 @@ Use `BindingContext` e `Command` para ligar View ao ViewModel:
 
 ## 7. Como usar Blazor com MAUI?
 
-**Resposta clara:**
 .NET MAUI permite usar Blazor no mobile via `BlazorWebView`, renderizando componentes Razor dentro do app:
 
 ```csharp
@@ -107,7 +100,6 @@ Ideal para reaproveitar código web em apps nativos.
 
 ## 8. Como acessar recursos nativos como GPS, Câmera, Notificações?
 
-**Resposta clara:**
 Use a biblioteca `Microsoft.Maui.Essentials`, que unifica APIs comuns:
 
 ```csharp
@@ -120,7 +112,6 @@ Outras APIs: `Camera`, `Flashlight`, `Preferences`, `SecureStorage`...
 
 ## 9. Como fazer deploy e debugging multiplataforma?
 
-**Resposta clara:**
 
 * Android: emulador Android Studio ou dispositivo físico.
 * iOS: requer Mac com Xcode.

@@ -4,7 +4,6 @@
 
 ## 1. Como evitar XSS (Cross-Site Scripting) em React?
 
-**Resposta clara:**
 React protege contra XSS por padrão: ele escapa automaticamente strings inseridas no JSX. Porém, se você usar `dangerouslySetInnerHTML`, está abrindo uma porta para XSS.
 
 **Boa prática:**
@@ -16,7 +15,6 @@ React protege contra XSS por padrão: ele escapa automaticamente strings inserid
 
 ## 2. Qual a diferença entre cookies e localStorage para autenticação?
 
-**Resposta clara:**
 
 * **Cookies:** podem ser acessíveis pelo servidor (com `httpOnly`) e usados em SSR. Mais seguros contra XSS, mas vulneráveis a CSRF se mal configurados.
 * **localStorage:** acessível apenas no client. Suscetível a XSS, pois qualquer script malicioso pode ler o token.
@@ -27,7 +25,6 @@ React protege contra XSS por padrão: ele escapa automaticamente strings inserid
 
 ## 3. Como proteger rotas de API no Next.js?
 
-**Resposta clara:**
 Use validação de sessão/token no início de cada handler:
 
 ```ts
@@ -48,7 +45,6 @@ export default function handler(req, res) {
 
 ## 4. O que é CSRF e como evitá-lo?
 
-**Resposta clara:**
 **CSRF (Cross-Site Request Forgery)** ocorre quando um site malicioso induz o navegador do usuário a fazer uma requisição autenticada a outro site onde ele está logado.
 
 **Prevenção em Next.js:**
@@ -61,7 +57,6 @@ export default function handler(req, res) {
 
 ## 5. Como lidar com autenticação e SSR no App Router?
 
-**Resposta clara:**
 Utilize funções server-side como `cookies()` ou `getToken()` (com NextAuth ou JWT manual).
 
 **Exemplo:**
@@ -77,7 +72,6 @@ Se não houver token, redirecione com `redirect('/login')`.
 
 ## 6. Como validar e sanitizar input do usuário?
 
-**Resposta clara:**
 Use bibliotecas como:
 
 * **Zod/Yup:** para validar esquemas no backend ou frontend.
@@ -89,7 +83,6 @@ Nunca confie no que vem do client. Mesmo formulários "travados" podem ser burla
 
 ## 7. Como prevenir brute force e abuso nas rotas API?
 
-**Resposta clara:**
 
 * Limite tentativas por IP (Rate limiting): `express-rate-limit`, `next-rate-limit`, `upstash/ratelimit`.
 * Use captchas (hCaptcha, reCAPTCHA) em endpoints sensíveis.
@@ -99,7 +92,6 @@ Nunca confie no que vem do client. Mesmo formulários "travados" podem ser burla
 
 ## 8. Como lidar com erros de forma segura?
 
-**Resposta clara:**
 
 * Nunca exponha `stack traces` ou mensagens internas ao client.
 * No client, mostre mensagens genéricas: "Algo deu errado".
@@ -109,7 +101,6 @@ Nunca confie no que vem do client. Mesmo formulários "travados" podem ser burla
 
 ## 9. Como garantir que headers sensíveis estejam ativos?
 
-**Resposta clara:**
 Use a opção `headers` do Next.js ou um proxy (como Vercel, NGINX) para forçar headers como:
 
 * `Content-Security-Policy`
@@ -137,7 +128,6 @@ headers() {
 
 ## 10. Como lidar com dependências inseguras no projeto?
 
-**Resposta clara:**
 
 * Use `npm audit` ou `pnpm audit` para verificar vulnerabilidades.
 * Atualize pacotes regularmente.
