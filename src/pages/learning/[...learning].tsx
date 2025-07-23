@@ -128,7 +128,6 @@ export default function LearningTopicPage({ contentHtml, area, title, slug }: Pa
       </Box>
 
       <ToggleThemeButton mode={mode} toggle={toggleMode} />
-      <ResetLearningTimeButton />
 
       <ParticlesBackground />
     </>
