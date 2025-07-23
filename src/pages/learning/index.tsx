@@ -1,7 +1,12 @@
 import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import NextLink from 'next/link';
-import { Box, Typography, Link as MuiLink } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Link as MuiLink,
+  IconButton,
+} from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { ResetLearningTimeButton } from '@/components/ResetLearningTimeButton';
@@ -9,6 +14,9 @@ import { getTimes, formatSeconds } from '@/utils/learningTime';
 import { getAllSections, Section } from '@/utils/md';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
 import { ParticlesBackground } from '@/components/ParticlesBackground';
+import { getStars, toggleStar } from '@/utils/stars';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 type Props = { sections: Section[] };
 
@@ -19,9 +27,11 @@ export const getStaticProps: GetStaticProps<Props> = async () => ({
 export default function KnowledgeIndex({ sections }: Props) {
   const { mode, theme, toggleMode } = useThemeMode();
   const [times, setTimes] = useState<Record<string, number>>({});
+  const [stars, setStars] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
     setTimes(getTimes());
+    setStars(getStars());
   }, []);
 
   if (!sections.length)
@@ -65,6 +75,7 @@ export default function KnowledgeIndex({ sections }: Props) {
             <Box sx={{ display: 'grid', gap: 2 }}>
               {topics.map(({ slug, title }) => {
                 const seconds = times[slug] ?? 0;
+                const starred = !!stars[slug];
                 return (
                   <MuiLink
                     key={slug}
@@ -84,18 +95,35 @@ export default function KnowledgeIndex({ sections }: Props) {
                       transition: '0.2s',
                       '&:hover': {
                         backgroundColor:
-                          theme.palette.mode === 'light'
-                            ? '#f0f0f0'
-                            : '#2a2a2a',
+                          theme.palette.mode === 'light' ? '#f0f0f0' : '#2a2a2a',
                       },
                     }}
                   >
                     <span>{title}</span>
-                    {seconds > 0 && (
-                      <Typography component='span' sx={{ color: 'text.secondary', fontSize: '0.75rem' }}>
-                        {formatSeconds(seconds)}
-                      </Typography>
-                    )}
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      {seconds > 0 && (
+                        <Typography component='span' sx={{ color: 'text.secondary', fontSize: '0.75rem' }}>
+                          {formatSeconds(seconds)}
+                        </Typography>
+                      )}
+                      <IconButton
+                        size='small'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          const next = toggleStar(slug);
+                          setStars((prev) => {
+                            const copy = { ...prev };
+                            if (next) copy[slug] = true;
+                            else delete copy[slug];
+                            return copy;
+                          });
+                        }}
+                        sx={{ color: starred ? 'warning.main' : 'text.disabled' }}
+                      >
+                        {starred ? <StarIcon fontSize='inherit' /> : <StarBorderIcon fontSize='inherit' />}
+                      </IconButton>
+                    </Box>
                   </MuiLink>
                 );
               })}

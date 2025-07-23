@@ -1,14 +1,23 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NextLink from 'next/link';
-import { Breadcrumbs, Link as MuiLink, Typography, Box } from '@mui/material';
-import { useEffect } from 'react';
+import {
+  Breadcrumbs,
+  Link as MuiLink,
+  Typography,
+  Box,
+  IconButton,
+} from '@mui/material';
+import { useEffect, useState } from 'react';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
 import { ResetLearningTimeButton } from '@/components/ResetLearningTimeButton';
 import { getAllSections, getTopicContent } from '@/utils/md';
 import { addTime } from '@/utils/learningTime';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
 import { ParticlesBackground } from '@/components/ParticlesBackground';
+import { isStarred, toggleStar } from '@/utils/stars';
+import StarIcon from '@mui/icons-material/Star';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 interface PageProps {
   contentHtml: string;
@@ -48,6 +57,7 @@ function wrapTablesWithScroll(html: string): string {
 
 export default function LearningTopicPage({ contentHtml, area, title, slug }: PageProps) {
   const { mode, theme, toggleMode } = useThemeMode();
+  const [starred, setStarred] = useState(false);
 
   useEffect(() => {
     const start = Date.now();
@@ -56,6 +66,7 @@ export default function LearningTopicPage({ contentHtml, area, title, slug }: Pa
       addTime(slug, delta);
     };
     window.addEventListener('pagehide', save);
+    setStarred(isStarred(slug));
     return () => {
       save();
       window.removeEventListener('pagehide', save);
@@ -90,7 +101,19 @@ export default function LearningTopicPage({ contentHtml, area, title, slug }: Pa
             {area}
           </MuiLink>
 
-          <Typography color='text.primary'>{title}</Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <Typography color='text.primary'>{title}</Typography>
+            <IconButton
+              size='small'
+              onClick={() => {
+                const next = toggleStar(slug);
+                setStarred(next);
+              }}
+              sx={{ color: starred ? 'warning.main' : 'text.disabled' }}
+            >
+              {starred ? <StarIcon fontSize='inherit' /> : <StarBorderIcon fontSize='inherit' />}
+            </IconButton>
+          </Box>
         </Breadcrumbs>
 
         <Box
