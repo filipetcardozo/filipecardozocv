@@ -1,16 +1,20 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import NextLink from 'next/link';
-import { Breadcrumbs, Link as MuiLink, Typography, useTheme, Box } from '@mui/material';
+import { Breadcrumbs, Link as MuiLink, Typography, Box } from '@mui/material';
+import { useEffect } from 'react';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
+import { ResetLearningTimeButton } from '@/components/ResetLearningTimeButton';
 import { getAllSections, getTopicContent } from '@/utils/md';
+import { addTime } from '@/utils/learningTime';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
-import { ParticlesBackground } from "@/components/ParticlesBackground";
+import { ParticlesBackground } from '@/components/ParticlesBackground';
 
 interface PageProps {
   contentHtml: string;
   area: string;
   title: string;
+  slug: string;
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -33,7 +37,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
 
-  return { props: { contentHtml, area, title } };
+  return { props: { contentHtml, area, title, slug: learning } };
 };
 
 function wrapTablesWithScroll(html: string): string {
@@ -42,8 +46,21 @@ function wrapTablesWithScroll(html: string): string {
     .replace(/<\/table>/g, '</table></div>');
 }
 
-export default function LearningTopicPage({ contentHtml, area, title }: PageProps) {
+export default function LearningTopicPage({ contentHtml, area, title, slug }: PageProps) {
   const { mode, theme, toggleMode } = useThemeMode();
+
+  useEffect(() => {
+    const start = Date.now();
+    const save = () => {
+      const delta = Math.round((Date.now() - start) / 1000);
+      addTime(slug, delta);
+    };
+    window.addEventListener('pagehide', save);
+    return () => {
+      save();
+      window.removeEventListener('pagehide', save);
+    };
+  }, [slug]);
 
   return (
     <>
@@ -52,31 +69,32 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
       </Head>
 
       <Box
-        component="main"
+        component='main'
         sx={{
           minHeight: '100vh',
           px: 2,
           overflowX: 'hidden',
+          pb: 20
         }}
       >
         <Breadcrumbs sx={{ mb: 4, maxWidth: 1024, mx: 'auto', pt: 4 }}>
-          <MuiLink component={NextLink} href="/learning" underline="hover">
+          <MuiLink component={NextLink} href='/learning' underline='hover'>
             Learning
           </MuiLink>
 
           <MuiLink
-            component="span"
-            underline="none"
+            component='span'
+            underline='none'
             sx={{ textTransform: 'uppercase', color: 'text.secondary' }}
           >
             {area}
           </MuiLink>
 
-          <Typography color="text.primary">{title}</Typography>
+          <Typography color='text.primary'>{title}</Typography>
         </Breadcrumbs>
 
         <Box
-          component="article"
+          component='article'
           sx={{
             maxWidth: 1024,
             mx: 'auto',
@@ -110,6 +128,7 @@ export default function LearningTopicPage({ contentHtml, area, title }: PageProp
       </Box>
 
       <ToggleThemeButton mode={mode} toggle={toggleMode} />
+      <ResetLearningTimeButton />
 
       <ParticlesBackground />
     </>
