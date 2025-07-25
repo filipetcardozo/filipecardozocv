@@ -4,16 +4,12 @@
 
 ### 1. **Como você faz o deploy de uma aplicação React estática na Azure?**
 
-**(Nível: Básico)**
-
 Para aplicações React puramente estáticas, uso o serviço **Azure Static Web Apps**. Ele oferece deploy direto a partir de um repositório GitHub ou Azure DevOps, com build automático via GitHub Actions.
 O processo envolve configurar o `build` script no `package.json`, apontar o diretório de saída (geralmente `build/`) e definir o branch de produção. Também é possível adicionar rotas personalizadas e regras de autenticação via `staticwebapp.config.json`.
 
 ---
 
 ### 2. **Como você lidaria com variáveis de ambiente em uma aplicação Next.js na Azure?**
-
-**(Nível: Básico)**
 
 No Next.js, utilizo variáveis via `process.env`. Para expor variáveis ao cliente, prefixo com `NEXT_PUBLIC_`.
 Na Azure, se uso App Service, defino essas variáveis nos Application Settings. Para Static Web Apps, é possível adicioná-las no portal, e o Azure cuida de injetá-las no momento do build.
@@ -22,8 +18,6 @@ Para dados sensíveis (como chaves de API), uso **Azure Key Vault**, acessado no
 ---
 
 ### 3. **Quais formas você conhece para hospedar uma aplicação Next.js com SSR na Azure?**
-
-**(Nível: Intermediário)**
 
 O Next.js com SSR requer um ambiente Node.js ativo. As opções que uso incluem:
 
@@ -36,8 +30,6 @@ O Next.js com SSR requer um ambiente Node.js ativo. As opções que uso incluem:
 
 ### 4. **Como você gerencia o versionamento de deploys e rollback em React/Next.js no Azure?**
 
-**(Nível: Intermediário)**
-
 Uso **GitHub Actions** ou Azure DevOps com pipelines CI/CD. No caso do Azure App Service, ativo **deployment slots** (`staging`, `production`) para testar antes do swap.
 Em Static Web Apps, utilizo PR previews e posso desfazer merges.
 Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage ou CDN) e, se necessário, configuro fallback para versões anteriores via Front Door ou regras de roteamento.
@@ -45,9 +37,6 @@ Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage 
 ---
 
 ### 5. **Como você garante que sua aplicação React/Next.js esteja segura ao ser exposta na internet via Azure?**
-
-**(Nível: Intermediário)**
-
 
 * Coloco a aplicação atrás de **Azure Front Door** para WAF e HTTPS com TLS atualizado.
 * Configuro **CSP headers** para evitar XSS.
@@ -59,8 +48,6 @@ Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage 
 
 ### 6. **Como você implementa cache eficiente para páginas Next.js no Azure?**
 
-**(Nível: Avançado)**
-
 Uso **Incremental Static Regeneration (ISR)** com `revalidate` configurado em `getStaticProps`. As páginas são reconstruídas sob demanda e cacheadas.
 Na borda, uso **Azure CDN** ou **Front Door** para servir conteúdo cacheado globalmente.
 Para SSR, uso `Cache-Control` nos headers via `getServerSideProps` e crio regras no Azure Front Door para TTL.
@@ -69,8 +56,6 @@ Para páginas com dados sensíveis ou dinâmicos, evito cache público e uso ses
 ---
 
 ### 7. **Como você lida com autenticação corporativa (Azure AD) em aplicações React ou Next.js na Azure?**
-
-**(Nível: Avançado)**
 
 Uso o pacote **@azure/msal-browser** no React para autenticação client-side com Azure AD.
 Para Next.js com SSR, prefiro NextAuth.js com o provedor `AzureAD`, ou configuro autenticação manual via `passport-azure-ad`.
@@ -82,9 +67,6 @@ Quando possível, uso **Easy Auth** no App Service para delegar essa responsabil
 
 ### 8. **Como você faria monitoramento completo de uma aplicação Next.js na Azure?**
 
-**(Nível: Avançado)**
-
-
 * Integro o front-end com **Application Insights**, usando o SDK JavaScript para rastrear erros, page views, dependências e tempos de carregamento.
 * No servidor (SSR ou APIs), também uso Application Insights com integração automática no App Service ou manual via SDK.
 * Para métricas customizadas, utilizo `trackEvent`, `trackMetric`, etc.
@@ -94,8 +76,6 @@ Quando possível, uso **Easy Auth** no App Service para delegar essa responsabil
 
 ### 9. **Como você faria blue/green deploys em uma aplicação React hospedada no Azure App Service?**
 
-**(Nível: Avançado)**
-
 Utilizo **deployment slots**. Faço o deploy na slot `staging`, executo testes automáticos ou manuais, e só então promovo o slot para `production` com um **swap**.
 Essa abordagem permite rollback instantâneo.
 Configuro também **traffic splitting** entre slots, permitindo canary releases (por exemplo, 10% para `staging`, 90% para `production`).
@@ -104,8 +84,6 @@ Além disso, mantenho logs e rastreamento separado por slot para debugging.
 ---
 
 ### 10. **Quais são os desafios de hospedar uma aplicação híbrida (SSG + SSR) em Next.js no Azure e como você os supera?**
-
-**(Nível: Avançado)**
 
 O principal desafio é que partes SSG podem ser servidas por CDN, enquanto SSR exige execução em Node. No Azure:
 
