@@ -1,7 +1,5 @@
 ### 1. Quais são as duas **regras dos React Hooks** e por que quebrá-las causa bugs?
 
-**Resposta — em resumo**
-
 1. **Chame hooks apenas em funções React** (componentes ou outros hooks).
 2. **Chame-os sempre no topo da função**, jamais em loops, condições ou funções internas.
 
@@ -10,8 +8,6 @@ Essas regras garantem que a ordem dos hooks permaneça estável entre renders. S
 ---
 
 ### 2. Quando usar **`useNavigate`** (React Router v6) em vez de `<Link>` ou do antigo `useHistory`?
-
-**Resposta — ponto-a-ponto**
 
 * `useNavigate()` devolve uma função `navigate()` que muda a rota programaticamente.
 * Substitui `history.push()`/`history.replace()` do v5 e é ideal em fluxos imperativos (login, erro 403, salvamento de formulário).

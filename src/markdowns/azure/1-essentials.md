@@ -62,5 +62,4 @@ O Azure permite escalabilidade tanto vertical quanto horizontal. Por exemplo, co
 
 ### 10. **Como você controla e restringe acessos a recursos no Azure?**
 
-**Resposta:**
 Uso o RBAC (Role-Based Access Control), que permite atribuir permissões a usuários, grupos e aplicações com base em papéis (como leitor, colaborador ou proprietário). As permissões podem ser aplicadas em nível de subscription, resource group ou recurso individual. Para reforçar, combino com Azure Policies e, quando necessário, com Conditional Access e identidade gerenciada.

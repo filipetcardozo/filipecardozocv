@@ -1,6 +1,5 @@
 ### 1. **O que é o ciclo de vida de um componente em React e por que ele é importante?**
 
-**Resposta (tom de entrevista):**
 “O ciclo de vida descreve as fases pelas quais um componente passa — montagem, atualização e desmontagem. Entender esses estágios me permite escolher onde inicializar dados, escutar eventos ou liberar recursos. Sem essa visão, eu corro o risco de criar vazamentos de memória ou renderizações desnecessárias.”
 
 ---

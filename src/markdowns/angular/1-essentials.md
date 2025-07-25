@@ -1,6 +1,6 @@
 ## ✅ 1. **O que é um componente em Angular?**
 
-> **Resposta curta:**
+
 > Um componente é uma unidade de interface que controla uma parte da tela. Ele combina HTML, CSS e lógica TypeScript, e é definido com o decorator `@Component`.
 
 > **Explicação crítica:**
@@ -10,7 +10,7 @@
 
 ## ✅ 2. **Quais os tipos de data binding em Angular?**
 
-> **Resposta curta:**
+
 
 * `{{ expression }}` → Interpolação (one-way: componente → template)
 * `[property]` → Property binding (one-way: componente → DOM)
@@ -24,7 +24,7 @@
 
 ## ✅ 3. **Para que servem `@Input()` e `@Output()`?**
 
-> **Resposta curta:**
+
 
 * `@Input()` permite que o componente receba dados do componente pai.
 * `@Output()` permite emitir eventos para o pai, via `EventEmitter`.
@@ -36,7 +36,7 @@
 
 ## ✅ 4. **O que são diretivas? Quais tipos existem?**
 
-> **Resposta curta:**
+
 > Diretivas são instruções para o DOM. Existem três tipos:
 
 * **Estruturais**: alteram o layout (ex: `*ngIf`, `*ngFor`)
@@ -50,7 +50,7 @@
 
 ## ✅ 5. **Como funciona a injeção de dependência no Angular?**
 
-> **Resposta curta:**
+
 > Angular cria e gerencia instâncias de serviços automaticamente. Você declara dependências no construtor, e o Angular as injeta com base no escopo definido (por módulo, componente ou globalmente).
 
 > **Explicação crítica:**
@@ -60,7 +60,7 @@
 
 ## ✅ 6. **O que é o `ngOnInit` e quando ele é chamado?**
 
-> **Resposta curta:**
+
 > `ngOnInit()` é um lifecycle hook chamado uma vez após a criação do componente e inicialização das `@Input()`.
 
 > **Explicação crítica:**
@@ -70,7 +70,7 @@
 
 ## ✅ 7. **O que são Pipes e para que servem?**
 
-> **Resposta curta:**
+
 > Pipes são usados para transformar dados diretamente no template (ex: `{{ data | date }}`).
 
 > **Explicação crítica:**
@@ -80,7 +80,7 @@
 
 ## ✅ 8. **Qual a diferença entre Template-Driven e Reactive Forms?**
 
-> **Resposta curta:**
+
 
 * Template-driven: definidos no HTML com `ngModel`, mais simples, menos controle.
 * Reactive: definidos no TypeScript com `FormControl`/`FormGroup`, mais controlados, testáveis e escaláveis.
@@ -92,7 +92,7 @@
 
 ## ✅ 9. **Como funciona o roteamento em Angular?**
 
-> **Resposta curta:**
+
 > Você define rotas em um array de `Routes`, usa `RouterModule.forRoot()` e coloca `<router-outlet>` no template para exibir o componente correspondente.
 
 > **Explicação crítica:**
@@ -102,7 +102,7 @@
 
 ## ✅ 10. **O que é um Observable e como o Angular o utiliza?**
 
-> **Resposta curta:**
+
 > Um `Observable` é uma stream de dados que pode emitir múltiplos valores ao longo do tempo. Angular os usa em HTTP, formulários, eventos e muito mais.
 
 > **Explicação crítica:**

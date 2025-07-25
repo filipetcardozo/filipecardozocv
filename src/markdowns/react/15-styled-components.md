@@ -1,6 +1,5 @@
 ### ✅ 1. **Como funciona o isolamento de escopo de estilos em Styled Components?**
 
-**Resposta (formato entrevista):**
 “Styled Components gera automaticamente uma classe com um nome único e hash aleatório para cada componente estilizado. Isso garante que os estilos sejam escopados ao componente, evitando conflitos com outros componentes, mesmo que usem tags ou nomes semelhantes.
 Na prática, isso me dá mais previsibilidade e evita o clássico problema de ‘vazamento de estilo’ — algo que é comum quando se trabalha com CSS global ou até mesmo com BEM em larga escala.”
 

@@ -152,8 +152,6 @@ Isso gera **contratos explícitos** entre client e server — evita erros silenc
 
 Diferente de REST, GraphQL pode retornar **dados parciais** + um array de erros.
 
-**Resposta comum:**
-
 ```json
 {
   "data": {
