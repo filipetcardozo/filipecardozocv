@@ -67,7 +67,6 @@ Content-Type: application/json
 * **Content-Type:** define o tipo do corpo da requisição.
 * Para REST APIs modernas, o mais comum é `application/json`.
 
-**Resposta:**
 
 ```http
 HTTP/1.1 201 Created

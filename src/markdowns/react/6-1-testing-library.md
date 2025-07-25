@@ -4,7 +4,6 @@
 
 ## 1. Qual é a filosofia da Testing Library?
 
-**Resposta:**
 "Test the way the user uses your app." Em vez de testar implementação (como classes CSS ou chamadas internas), a TL prioriza interação com elementos reais, como um usuário faria.
 
 ---
@@ -19,7 +18,6 @@
 
 ## 3. Por que evitar `getByTestId` em excesso?
 
-**Resposta:**
 `data-testid` deve ser o último recurso. Prefira `getByRole`, `getByLabelText`, `getByText` — que refletem o uso real da UI.
 
 ---

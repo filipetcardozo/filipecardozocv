@@ -8,7 +8,6 @@ Na prática, isso me dá mais previsibilidade e evita o clássico problema de �
 
 ### ✅ 2. **Quais são os benefícios práticos do uso de Styled Components em relação a CSS tradicional ou pré-processadores como SASS?**
 
-**Resposta:**
 “O principal benefício é o acoplamento entre estilo e comportamento. Com Styled Components, eu tenho o CSS junto da lógica de renderização, o que facilita a leitura e manutenção.
 Além disso, os estilos são dinâmicos — posso usar props, acessar temas e até fazer *nesting* ou interpolar valores de JS.
 Comparado ao SASS, não preciso me preocupar com escopo ou ordem de importação. E diferente do CSS global, tudo é modular e previsível. Também ganho vantagens com o autocompletion e tipagem de props no editor, o que melhora a produtividade.”
@@ -17,7 +16,6 @@ Comparado ao SASS, não preciso me preocupar com escopo ou ordem de importação
 
 ### ✅ 3. **Como funcionam as props nos styled components? Dê um exemplo.**
 
-**Resposta:**
 “Posso passar props diretamente para o styled component e usá-las para modificar dinamicamente o estilo.
 Um exemplo simples seria:
 
@@ -33,7 +31,6 @@ Essa abordagem permite criar componentes altamente reutilizáveis e personalizá
 
 ### ✅ 4. **Como Styled Components lida com temas (themings)? Qual é o papel do `ThemeProvider`?**
 
-**Resposta:**
 “O `ThemeProvider` injeta um tema global via contexto React, permitindo que qualquer styled component acesse valores como cores, espaçamentos ou fontes por meio das props de tema.
 Isso me permite centralizar decisões de design e manter consistência visual em todo o app.
 No dia a dia, por exemplo, uso isso para alternar entre tema claro e escuro, ou para aplicar tokens de design definidos com o time de design.”
@@ -48,7 +45,6 @@ No dia a dia, por exemplo, uso isso para alternar entre tema claro e escuro, ou 
 
 ### ✅ 5. **Quais são os principais trade-offs ao usar Styled Components em um projeto grande?**
 
-**Resposta:**
 “Os benefícios são claros, mas há alguns pontos de atenção:
 
 * **Performance:** como ele gera estilos em tempo de execução, isso pode impactar apps com muitos componentes ou renderizações frequentes.

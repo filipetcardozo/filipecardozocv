@@ -6,7 +6,6 @@
 
 **(Nível: Básico)**
 
-**Resposta:**
 Para aplicações React puramente estáticas, uso o serviço **Azure Static Web Apps**. Ele oferece deploy direto a partir de um repositório GitHub ou Azure DevOps, com build automático via GitHub Actions.
 O processo envolve configurar o `build` script no `package.json`, apontar o diretório de saída (geralmente `build/`) e definir o branch de produção. Também é possível adicionar rotas personalizadas e regras de autenticação via `staticwebapp.config.json`.
 
@@ -16,7 +15,6 @@ O processo envolve configurar o `build` script no `package.json`, apontar o dire
 
 **(Nível: Básico)**
 
-**Resposta:**
 No Next.js, utilizo variáveis via `process.env`. Para expor variáveis ao cliente, prefixo com `NEXT_PUBLIC_`.
 Na Azure, se uso App Service, defino essas variáveis nos Application Settings. Para Static Web Apps, é possível adicioná-las no portal, e o Azure cuida de injetá-las no momento do build.
 Para dados sensíveis (como chaves de API), uso **Azure Key Vault**, acessado no servidor via `getServerSideProps` ou funções serverless.
@@ -27,7 +25,6 @@ Para dados sensíveis (como chaves de API), uso **Azure Key Vault**, acessado no
 
 **(Nível: Intermediário)**
 
-**Resposta:**
 O Next.js com SSR requer um ambiente Node.js ativo. As opções que uso incluem:
 
 * **Azure App Service (Linux)** com Node runtime, ideal para SSR e API routes.
@@ -41,7 +38,6 @@ O Next.js com SSR requer um ambiente Node.js ativo. As opções que uso incluem:
 
 **(Nível: Intermediário)**
 
-**Resposta:**
 Uso **GitHub Actions** ou Azure DevOps com pipelines CI/CD. No caso do Azure App Service, ativo **deployment slots** (`staging`, `production`) para testar antes do swap.
 Em Static Web Apps, utilizo PR previews e posso desfazer merges.
 Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage ou CDN) e, se necessário, configuro fallback para versões anteriores via Front Door ou regras de roteamento.
@@ -52,7 +48,6 @@ Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage 
 
 **(Nível: Intermediário)**
 
-**Resposta:**
 
 * Coloco a aplicação atrás de **Azure Front Door** para WAF e HTTPS com TLS atualizado.
 * Configuro **CSP headers** para evitar XSS.
@@ -66,7 +61,6 @@ Além disso, mantenho os builds versionados (por exemplo, no Azure Blob Storage 
 
 **(Nível: Avançado)**
 
-**Resposta:**
 Uso **Incremental Static Regeneration (ISR)** com `revalidate` configurado em `getStaticProps`. As páginas são reconstruídas sob demanda e cacheadas.
 Na borda, uso **Azure CDN** ou **Front Door** para servir conteúdo cacheado globalmente.
 Para SSR, uso `Cache-Control` nos headers via `getServerSideProps` e crio regras no Azure Front Door para TTL.
@@ -78,7 +72,6 @@ Para páginas com dados sensíveis ou dinâmicos, evito cache público e uso ses
 
 **(Nível: Avançado)**
 
-**Resposta:**
 Uso o pacote **@azure/msal-browser** no React para autenticação client-side com Azure AD.
 Para Next.js com SSR, prefiro NextAuth.js com o provedor `AzureAD`, ou configuro autenticação manual via `passport-azure-ad`.
 Configuro o aplicativo no **Azure AD (App Registration)** com Redirect URIs, permissões e scopes corretos.
@@ -91,7 +84,6 @@ Quando possível, uso **Easy Auth** no App Service para delegar essa responsabil
 
 **(Nível: Avançado)**
 
-**Resposta:**
 
 * Integro o front-end com **Application Insights**, usando o SDK JavaScript para rastrear erros, page views, dependências e tempos de carregamento.
 * No servidor (SSR ou APIs), também uso Application Insights com integração automática no App Service ou manual via SDK.
@@ -104,7 +96,6 @@ Quando possível, uso **Easy Auth** no App Service para delegar essa responsabil
 
 **(Nível: Avançado)**
 
-**Resposta:**
 Utilizo **deployment slots**. Faço o deploy na slot `staging`, executo testes automáticos ou manuais, e só então promovo o slot para `production` com um **swap**.
 Essa abordagem permite rollback instantâneo.
 Configuro também **traffic splitting** entre slots, permitindo canary releases (por exemplo, 10% para `staging`, 90% para `production`).
@@ -116,7 +107,6 @@ Além disso, mantenho logs e rastreamento separado por slot para debugging.
 
 **(Nível: Avançado)**
 
-**Resposta:**
 O principal desafio é que partes SSG podem ser servidas por CDN, enquanto SSR exige execução em Node. No Azure:
 
 * Divido a aplicação: estáticos vão para **Azure Static Web Apps** ou **Blob + CDN**.

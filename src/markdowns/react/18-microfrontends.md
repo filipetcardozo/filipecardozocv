@@ -1,6 +1,5 @@
 ### ✅ 1. **O que são Microfrontends e em que cenários eles fazem sentido?**
 
-**Resposta:**
 “Microfrontends levam a filosofia de microserviços para a camada de UI. Em vez de um grande front-end monolítico, quebramos a interface em ‘pedaços’ autônomos — cada um com código, deploy e time próprios.
 Eles fazem sentido quando a aplicação é grande e várias squads precisam entregar features de ponta a ponta sem depender de um repositório único ou releases sincronizados. É especialmente útil quando equipes querem evoluir stacks diferentes (ex.: React + Vite numa parte, Angular em outra) ou quando o domínio de negócio é muito amplo.”
 
@@ -8,7 +7,6 @@ Eles fazem sentido quando a aplicação é grande e várias squads precisam entr
 
 ### ✅ 2. **Quais abordagens você conhece para implementar Microfrontends? Já aplicou alguma?**
 
-**Resposta:**
 “As três mais comuns:
 
 1. **Iframes** – isolamento total, mas integração limitada.
@@ -21,7 +19,6 @@ No meu último projeto, usamos **Webpack Module Federation** com CI/CD independe
 
 ### ✅ 3. **Quais os principais desafios ao trabalhar com Microfrontends? Como você lidou com eles?**
 
-**Resposta:**
 “Minhas maiores dores foram:
 
 * **Consistência visual**: resolvemos criando um Design System compartilhado publicado no npm, versionado semântico.
@@ -33,7 +30,6 @@ No meu último projeto, usamos **Webpack Module Federation** com CI/CD independe
 
 ### ✅ 4. **Como funciona o isolamento entre Microfrontends? Há riscos de conflitos?**
 
-**Resposta:**
 “O isolamento não é automático; precisamos disciplina. Usamos:
 
 * **CSS Modules + BEM** para evitar vazamento de estilos.
@@ -45,7 +41,6 @@ No meu último projeto, usamos **Webpack Module Federation** com CI/CD independe
 
 ### ✅ 5. **Quais são os trade-offs ao adotar Microfrontends? Recomendaria em qualquer projeto?**
 
-**Resposta:**
 “Não. Eles trazem **overhead de build, orquestração e comunicação**. Se o produto é menor ou feito por um único time, a complexidade não compensa.
 Eu recomendo quando:
 
@@ -59,7 +54,6 @@ Caso contrário, um monorepo modular ou uma SPA bem arquitetada resolve.”
 
 ### ✅ 6. **Como você gerencia versões e contratos entre MFEs para evitar breaking changes?**
 
-**Resposta:**
 “Estabelecemos **versionamento semântico estrito**. Cada MFE publica um pacote (ou bundle remoto) com `major.minor.patch`.
 Quebra de contrato = major bump. No host, travamos a versão major, mas permitimos `~minor` updates automáticos.
 Também usamos **tests de contrato** (Consumer-Driven Contracts) em CI, garantindo que mudanças num MFE não quebrem outro silenciosamente.”
@@ -68,7 +62,6 @@ Também usamos **tests de contrato** (Consumer-Driven Contracts) em CI, garantin
 
 ### ✅ 7. **Como lidar com autenticação e autorização em uma arquitetura de Microfrontends?**
 
-**Resposta:**
 “Centralizamos o token de autenticação em um `Auth MFE singleton`. Ele expõe um SDK leve que os outros MFEs consomem.
 Esse SDK fornece métodos como `getToken()`, `onAuthChange()`. Assim evitamos múltiplos redirects ou estados divergentes de login.
 No lado visual, mantemos a seção de conta (avatar, logout) também como um MFE compartilhado no topo da página.”
@@ -77,7 +70,6 @@ No lado visual, mantemos a seção de conta (avatar, logout) também como um MFE
 
 ### ✅ 8. **Qual é o papel de um ‘gateway’ ou ‘orchestrator’ em Microfrontends? Já implementou?**
 
-**Resposta:**
 “O ‘orchestrator’ (ou shell/contêiner) é responsável por:
 
 * Carregar os MFEs (via script ou import).
@@ -90,7 +82,6 @@ Já implementei usando **Single SPA**: cada MFE registra seu aplicativo, e o con
 
 ### ✅ 9. **Como você garante performance (LCP, TTI) em páginas compostas por vários MFEs?**
 
-**Resposta:**
 “Minhas práticas principais:
 
 1. **Critical rendering path**: só carrego MFEs visíveis na *viewport*.
@@ -102,7 +93,6 @@ Já implementei usando **Single SPA**: cada MFE registra seu aplicativo, e o con
 
 ### ✅ 10. **Já enfrentou migração de monolito para Microfrontends? Como faria um plano de transição?**
 
-**Resposta:**
 “Sim. O roteiro que sigo:
 
 1. **Estrangular**: identificar fronteiras naturais (ex.: módulo de pagamentos) e extrair como primeiro MFE.
