@@ -7,75 +7,101 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeHighlight from 'rehype-highlight';
 import remarkGfm from 'remark-gfm';
 
-export interface Topic {
-  slug: string;
-  title: string;
-}
+export type NodeKind = 'dir' | 'doc';
 
-export interface Section {
-  area: string;
-  topics: Topic[];
-}
+export type ContentNode = {
+  name: string;
+  slug: string;
+  kind: NodeKind;
+  title?: string;
+  children?: ContentNode[];
+};
 
 const contentRoot = path.join(process.cwd(), 'src/markdowns');
 
 const naturalSort = (a: string, b: string) =>
   a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' });
 
-export function getAllSections(): Section[] {
+export const toTitleCase = (s: string) =>
+  s.replace(/^\d+(?:-\d+)*-/, '')
+   .replace(/-/g, ' ')
+   .replace(/\b\w/g, c => c.toUpperCase());
+
+const readFrontTitle = (fullPath: string): string | null => {
   try {
-    const areas = fs
-      .readdirSync(contentRoot, { withFileTypes: true })
-      .filter((d) => d.isDirectory())
-      .sort((a, b) => naturalSort(a.name, b.name));
+    const file = fs.readFileSync(fullPath, 'utf8');
+    const { data } = matter(file);
+    const t = (data?.title ?? data?.name) as string | undefined;
+    return t ? String(t) : null;
+  } catch { return null; }
+};
 
-    return areas.map<Section>((dir) => {
-      const area = dir.name;
+const toSlug = (absPathWithoutExt: string) =>
+  path.relative(contentRoot, absPathWithoutExt).split(path.sep).join('/');
 
-      const files = fs
-        .readdirSync(path.join(contentRoot, area), { withFileTypes: true })
-        .filter((f) => f.isFile() && f.name.endsWith('.md'))
-        .sort((a, b) => naturalSort(a.name, b.name));
+const docNodeFromFile = (absMdPath: string): ContentNode => {
+  const noExt = absMdPath.replace(/\.md$/i, '');
+  const slug = toSlug(noExt);
+  const fmTitle = readFrontTitle(absMdPath);
+  const fileBase = path.basename(noExt);
+  const title = fmTitle ? fmTitle : toTitleCase(fileBase);
+  return { name: fileBase, slug, kind: 'doc', title };
+};
 
-      const topics = files.map<Topic>((file) => {
-        const base = file.name.replace(/\.md$/, '');
-        const slug = `${area}/${base}`;
+const buildTree = (absDir: string, rel: string[] = []): ContentNode[] => {
+  const entries = fs.readdirSync(absDir, { withFileTypes: true })
+    .sort((a, b) => naturalSort(a.name, b.name));
 
-        // Se quiser extrair o número como metadado opcional
-        const match = base.match(/^(\d+(?:-\d+)*)-(.*)$/); // e.g., "6-1-testing-library"
-        const title = match
-          ? `${match[1]} ${match[2].replace(/-/g, ' ')}`
-          : base.replace(/-/g, ' ');
+  const dirs: ContentNode[] = [];
+  const docs: ContentNode[] = [];
 
-        return {
-          slug,
-          title: title.replace(/\b\w/g, (c) => c.toUpperCase()),
-        };
+  for (const e of entries) {
+    const full = path.join(absDir, e.name);
+    if (e.isDirectory()) {
+      const children = buildTree(full, [...rel, e.name]);
+      dirs.push({
+        name: e.name,
+        slug: [...rel, e.name].join('/'),
+        kind: 'dir',
+        children
       });
-
-      return { area, topics };
-    });
-  } catch (err) {
-    console.error('❌ getAllSections():', err);
-    return [];
+    } else if (e.isFile() && e.name.endsWith('.md')) {
+      docs.push(docNodeFromFile(full));
+    }
   }
-}
 
-export async function getTopicContent(learning: string): Promise<{
-  contentHtml: string;
-  data: Record<string, unknown>;
-}> {
-  const fullPath = path.join(contentRoot, `${learning}.md`);
+  return [...dirs, ...docs];
+};
+
+export const getContentTree = (): ContentNode[] => {
+  if (!fs.existsSync(contentRoot)) return [];
+  return buildTree(contentRoot, []);
+};
+
+export const listAllDocSlugs = (nodes: ContentNode[]): string[] => {
+  const out: string[] = [];
+  const walk = (n: ContentNode) => {
+    if (n.kind === 'doc') out.push(n.slug);
+    n.children?.forEach(walk);
+  };
+  nodes.forEach(walk);
+  return out.sort(naturalSort);
+};
+
+export const getTopicContent = async (learning: string): Promise<{ contentHtml: string; data: Record<string, unknown>; }> => {
+  const candidates = [
+    path.join(contentRoot, `${learning}.md`),
+    path.join(contentRoot, learning, 'index.md'),
+  ];
+  const fullPath = candidates.find(p => fs.existsSync(p));
+  if (!fullPath) throw new Error(`Topic not found: ${learning}`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
-
   const { content, data } = matter(fileContents);
-
   const processed = await remark()
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeHighlight)
     .use(rehypeStringify)
     .process(content);
-
   return { contentHtml: processed.toString(), data };
-}
+};

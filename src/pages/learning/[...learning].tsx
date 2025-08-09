@@ -10,8 +10,7 @@ import {
 } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { ToggleThemeButton } from '@/components/ToggleThemeButton';
-import { ResetLearningTimeButton } from '@/components/ResetLearningTimeButton';
-import { getAllSections, getTopicContent } from '@/utils/md';
+import { getContentTree, listAllDocSlugs, getTopicContent, toTitleCase } from '@/utils/md';
 import { addTime } from '@/utils/learningTime';
 import { useThemeMode } from '@/contexts/ThemeModeContext';
 import { ParticlesBackground } from '@/components/ParticlesBackground';
@@ -19,43 +18,40 @@ import { isStarred, toggleStar } from '@/utils/stars';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
-interface PageProps {
+type PageProps = {
   contentHtml: string;
   area: string;
   title: string;
   slug: string;
-}
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = getAllSections().flatMap((s) =>
-    s.topics.map(({ slug }) => ({
-      params: { learning: slug.split('/') },
-    }))
-  );
+  const tree = getContentTree();
+  const slugs = listAllDocSlugs(tree);
+  const paths = slugs.map((slug) => ({ params: { learning: slug.split('/') } }));
   return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps<PageProps> = async ({ params }) => {
   const segments = params!.learning as string[];
   const learning = segments.join('/');
-  const { contentHtml } = await getTopicContent(learning);
+  const { contentHtml, data } = await getTopicContent(learning);
 
-  const area = segments[0];
-  const title = segments[1]
-    .replace(/^\d+-/, '')
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+  const parts = segments[segments.length - 1] === 'index' ? segments.slice(0, -1) : segments;
+  const title =
+    (typeof data?.title === 'string' && data.title.trim()) ?
+      String(data.title) :
+      toTitleCase(parts[parts.length - 1] ?? 'index');
+  const area = parts.slice(0, -1).join(' / ').toUpperCase();
 
   return { props: { contentHtml, area, title, slug: learning } };
 };
 
-function wrapTablesWithScroll(html: string): string {
-  return html
-    .replace(/<table>/g, '<div class="table-scroll"><table>')
+const wrapTablesWithScroll = (html: string): string =>
+  html.replace(/<table>/g, '<div class="table-scroll"><table>')
     .replace(/<\/table>/g, '</table></div>');
-}
 
-export default function LearningTopicPage({ contentHtml, area, title, slug }: PageProps) {
+const LearningTopicPage = ({ contentHtml, area, title, slug }: PageProps) => {
   const { mode, theme, toggleMode } = useThemeMode();
   const [starred, setStarred] = useState(false);
 
@@ -93,13 +89,15 @@ export default function LearningTopicPage({ contentHtml, area, title, slug }: Pa
             Learning
           </MuiLink>
 
-          <MuiLink
-            component='span'
-            underline='none'
-            sx={{ textTransform: 'uppercase', color: 'text.secondary' }}
-          >
-            {area}
-          </MuiLink>
+          {!!area && (
+            <MuiLink
+              component='span'
+              underline='none'
+              sx={{ textTransform: 'uppercase', color: 'text.secondary' }}
+            >
+              {area}
+            </MuiLink>
+          )}
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <Typography color='text.primary'>{title}</Typography>
@@ -151,8 +149,9 @@ export default function LearningTopicPage({ contentHtml, area, title, slug }: Pa
       </Box>
 
       <ToggleThemeButton mode={mode} toggle={toggleMode} />
-
       <ParticlesBackground />
     </>
   );
-}
+};
+
+export default LearningTopicPage;
